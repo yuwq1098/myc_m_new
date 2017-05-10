@@ -12,6 +12,13 @@ myc_m_new是在原有项目基础（作者：yyd）上进行拓展的页面，�
 **技术栈相关**
 
 1. node安装
+   
+    a.下载对应安装包[node下载地址](http://nodejs.cn/download/)
+
+    b.在cmd命令控制台测试node是否安装成功    
+            node -v
+            npm -v
+
 
 2. 利用npm安装相关依赖
 
