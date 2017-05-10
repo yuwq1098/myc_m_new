@@ -1,6 +1,6 @@
 木有车的移动端代码
 =======
-myc_m_new是Geek.Yu在原有项目基础myc（作者：@杨岩东）上进行拓展的页面
+myc_m_new是【@Geek.Yu】 在原有项目基础myc【@杨岩东】上进行拓展的页面
 
 本项目使用node.js、stylus、jade、fis3等技术栈实现，欢迎加Q（1098654043）交流
 
