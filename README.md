@@ -17,7 +17,7 @@ myc_m_new是在原有项目基础（作者：yyd）上进行拓展的页面，�
 
 1. node安装
    
-    a.下载对应安装包[node下载地址](http://nodejs.cn/download/)
+    a.下载对应安装包[node.js下载地址](http://nodejs.cn/download/)
 
     b.在cmd命令控制台测试node是否安装成功  
     
@@ -34,7 +34,8 @@ myc_m_new是在原有项目基础（作者：yyd）上进行拓展的页面，�
 		系统变量中的 path
 		;C:\Program Files\nodejs\  
 
-        注意： 高版本node.msi安装的会自动给给环境变量赋值
+        <font color=#ff4433 size=14 face="微软雅黑">注意： 高版本node.msi安装的会自动给给环境变量赋值</font>
+        
 
 
 2. 利用npm安装相关依赖
