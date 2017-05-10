@@ -62,11 +62,11 @@ myc_m_new是在原有项目基础（作者：yyd）上进行拓展的页面
 
 7. flexible.js的介绍
 		
-    a. [淘宝弹性布局方案lib-flexible](https://github.com/amfe/lib-flexible)
+    [淘宝弹性布局方案lib-flexible](https://github.com/amfe/lib-flexible)
 
-	b.	** 相关博客
+	** 相关博客
             
-        [使用Flexible实现手淘H5页面的终端适配  http://www.w3cplus.com/mobile/lib-flexible-for-html5-layout.html](http://www.w3cplus.com/mobile/lib-flexible-for-html5-layout.html)
+    [使用Flexible实现手淘H5页面的终端适配  http://www.w3cplus.com/mobile/lib-flexible-for-html5-layout.html](http://www.w3cplus.com/mobile/lib-flexible-for-html5-layout.html)
 
 8. geekyu.js的使用
 
