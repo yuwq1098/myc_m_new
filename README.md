@@ -39,8 +39,18 @@ myc_m_new是在原有项目基础（作者：yyd）上进行拓展的页面
 		****注意： 高版本node.msi安装的会自动给给环境变量赋值****
         
 
-
 2. 利用npm安装相关依赖
+		
+		npm install <package_name> --save
+
+		npm install <package_name> --save-dev
+
+		** 对应的简写：
+		
+		-S: --save
+		-D: --save-dev
+		-O: --save-optional
+		-B: --save-bundle
 
 3. jade相关语法及注意事项
 
