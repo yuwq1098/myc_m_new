@@ -36,7 +36,7 @@ myc_m_new是在原有项目基础（作者：yyd）上进行拓展的页面
 		系统变量中的 path
 		;C:\Program Files\nodejs\  
 
-		****注意： 高版本node.msi安装的会自动给给环境变量赋值****
+		** 注意： 高版本node.msi安装的会自动给给环境变量赋值
         
 
 2. 利用npm安装相关依赖
