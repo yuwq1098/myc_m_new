@@ -41,7 +41,7 @@ html
                     p
                         span 报告生成日期：2017-05-04 11:02:01
                     div.btn-box
-                        a.m-btn.m-btn-blue(href="javascript:;") 校验配置
+                        a.m-btn.m-btn-blue(href="check_config.html") 校验配置
             
             //报告概要
             section.listGroup
@@ -72,7 +72,7 @@ html
                 .tit.clearfix
                     h3  重要记录
                     section.right-box
-                        a.m-btn.m-btn-blue(href="javascript:;") 查看完整报告
+                        a.m-btn.m-btn-blue(href="full_mtnce_report.html") 查看完整报告
                 .con
                     ul.record-list
                         -for(var i = 0; i<data.result.length; i++)
@@ -122,32 +122,8 @@ html
         script(src="../js/jquery.min.js")
         // 复制内容到剪切板的脚本
         script(src="../js/clipboard.min.js")
+        script(src="../js/geekyu.js")
+        script(src="../js/app.js")
         script(type="text/javascript").
-            (function() {
-            	window.onload = function(){
-            		var copyBtn = document.getElementById("copyVIN");
-            		var clipboard = new Clipboard(copyBtn,{
-            			target: function(trigger){
-            				return trigger.previousSibling;
-            			}
-            		});
-            		// var URL = window.location.protocol+'//www.muyouche.com';
-            		var URL = 'https://www.muyouche.com';
-            		$.ajax({
-            			url: URL+'/action/getChaBaoYangRltByGuid.ashx?Guid=4D008743-138C-4AC0-8F97-1DF6372AD07E',
-                        type:'GET',
-                        dataType: "json",
-                        success:function(res){
-                            console.log(res);
-                        }
-            		})
-            		clipboard.on("success",function(e){
-                        alert("复制成功，可粘贴使用");
-            		})
-            		clipboard.on("error",function(e){
-                        alert("对不起，您的系统不支持自动复制，请手动复制");
-            		})
-
-            	}
-        
-            }).call(this);
+            mtnce_report();
+            
