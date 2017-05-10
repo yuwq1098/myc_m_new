@@ -10,13 +10,6 @@ myc_m_new是在原有项目基础（作者：yyd）上进行拓展的页面，�
 
 
 **技术栈相关**
-    
-####这是一个标题####
- 
-1. 这是第一个列表项。
-2. 这是第二个列表项。
- 
-这是一个代码例子：
 
-    <input class="datainp" id="indate" type="text" placeholder="请选择"  readonly>
-    <input class="datainp" id="dateinfo" type="text" placeholder="请选择"  readonly>
+* node环境
+
