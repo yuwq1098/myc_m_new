@@ -1,0 +1,153 @@
+doctype html
+html
+    head
+        meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width,initial-scale=1,user-scalable=0")
+        //禁用苹果默认样式
+        meta(name="apple-mobile-web-app-capable" content="yes")
+        meta(name="apple-mobile-web-app-status-bar-style" content="black")
+        //作者信息
+        meta(name="author" content="name:Geek.Yu,email:1098654043@qq.com")
+        //版权信息
+        meta(name="copyright" content="")
+        //禁止ios自动识别手机号和邮箱
+        meta(name="format-detection" content="telephone=no,address=no")
+        //木有车网页关键词
+        meta(name="keywords" content="")
+        //木有车网页描述
+        meta(name="description" content="木有车汽车服务平台(m.muyouche.com)")
+        title 木有车_车辆检测报告详情
+        link(href="../css/app.css", rel="stylesheet", type="text/css")
+        //调用弹性布局js
+        script(src="../js/flexible.js")
+        script(src="../js/app.js")
+        
+        // stylus css预编译插件
+        style
+            :stylus       
+
+    body.user-unselect(oncontextmenu="return false")
+        
+        .main-view.opaque
+            //主要信息
+            section.basic-info.clearfix
+                .left.imgwrap
+                    img(src="../img/b25.jpg" alt="汽车品牌LOGO")
+                .infor
+                    p 大众 帕萨特领驭
+                    p.vinbox
+                        span VIN：#{data.vin}
+                        a#copyVIN.m-btn(href="javascript:;" data-clipboard-target="#copyInput") 复制VIN
+                    p
+                        span 报告生成日期：2017-05-04 11:02:01
+                    div.btn-box
+                        a.m-btn.m-btn-blue(href="javascript:;") 校验配置
+            
+            //报告概要
+            section.listGroup
+                h3 报告概要
+                ul
+                    li
+                        span.title 最后进店时间：
+                        span.val= data.last_time_to_shop
+                    li
+                        span.title 最后进店里程：
+                        span.val= data.total_mileage
+                            |万公里
+                    li
+                        span.title 里程是否异常：
+                        span.val 否
+                    li
+                        span.title 三大件维修记录：
+                        span.val 暂无
+                    li
+                        span.title 火烧、泡水：
+                        span.val 暂无
+                    li
+                        span.title 车身结构异常：
+                        span.val 暂无
+
+            //养护记录
+            section.maintain
+                .tit.clearfix
+                    h3  重要记录
+                    section.right-box
+                        a.m-btn.m-btn-blue(href="javascript:;") 查看完整报告
+                .con
+                    ul.record-list
+                        -for(var i = 0; i<data.result.length; i++)
+                            -var item = data.result[i]
+                            li 
+                                section.time-box
+                                    span= item.date.substr(0,4)+"年"+item.date.substr(5,2)+"月"
+                                section.infor-box
+                                    .mileage
+                                        -var progress = ((item.mile/data.total_mileage)*100).toFixed(2)
+                                        .bar-wrap
+                                            .progress-bar
+                                                .gray-bar(style="width: #{progress}%")
+                                        span.mile= (item.mile/10000).toFixed(2)
+                                            |万公里
+                                    .pinfo
+                                        span.title 类型：
+                                        span.val.special= item.type
+                                    .pinfo
+                                        span.title 项目：
+                                        span.val= item.detail
+                                    .pinfo
+                                        span.title 材料：
+                                        span.val= item.other
+                                    .moreArrow(style="display:none")
+                                        img(src="../img/u258.png",style="display: none;")
+                                        img(src="../img/u358.png")
+
+
+            //免责条款
+            section.statement
+                .statementTit
+                    h3
+                        i.warn-ico
+                        span
+                            |免责条款
+                        //装饰
+                        .adorn
+                .statementCon
+                    p  本报告提供的所有内容及判断仅基于截至到报告购买日期收集的相关数据信息。关于此车辆其他信息（包括但不限于在非4S店或非授权制造商的维修保养信息）可能未被采集和收录。本报告仅是交易参考资料之一，请您结合实车勘验结果和试乘试驾体验，做出更精准的决策。
+
+        
+        // coffee-script js预编译插件
+        script
+            :coffee-script
+        // 引用jq库
+        script(src="../js/jquery.min.js")
+        // 复制内容到剪切板的脚本
+        script(src="../js/clipboard.min.js")
+        script(type="text/javascript").
+            (function() {
+            	window.onload = function(){
+            		var copyBtn = document.getElementById("copyVIN");
+            		var clipboard = new Clipboard(copyBtn,{
+            			target: function(trigger){
+            				return trigger.previousSibling;
+            			}
+            		});
+            		// var URL = window.location.protocol+'//www.muyouche.com';
+            		var URL = 'https://www.muyouche.com';
+            		$.ajax({
+            			url: URL+'/action/getChaBaoYangRltByGuid.ashx?Guid=4D008743-138C-4AC0-8F97-1DF6372AD07E',
+                        type:'GET',
+                        dataType: "json",
+                        success:function(res){
+                            console.log(res);
+                        }
+            		})
+            		clipboard.on("success",function(e){
+                        alert("复制成功，可粘贴使用");
+            		})
+            		clipboard.on("error",function(e){
+                        alert("对不起，您的系统不支持自动复制，请手动复制");
+            		})
+
+            	}
+        
+            }).call(this);

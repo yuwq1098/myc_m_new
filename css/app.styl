@@ -1,0 +1,364 @@
+@charset "utf-8"
+
+// 变量前缀为$ ,方法前缀为_
+
+//颜色变量
+$color_white = #fff
+$color_w1 = #f4f4f4
+$color_w2 = #ededed
+$color_black = #313536
+$color_gray = #b2b2b2
+$color_g1 = #a4a4a4
+$color_g2 = #959595
+$color_vital = #f43
+$color_blue = #3c89fd
+
+
+//字体大小变量
+$fontSize_small  = 12px
+$fontSize_normal = 13px
+$fontSize_medium = 16px
+$fontSize_large  = 22px
+$fontSize_super  = 30px
+
+//字体风格
+$fontFamily = "-apple-system-font","Helvetica Neue","sans-serif"
+
+//边框线
+_boder(direction,color=$color_w2,pixel=1px)
+    border-{direction} pixel solid color;
+
+//严格盒模型
+_box-sizing()
+    -webkit-box-sizing border-box
+    box-sizing border-box
+
+//图片大小控制(被容器填充)
+_imgwrap(node=imgwrap)
+    .{node}
+        img
+            width 100%
+            height 100%
+
+//显示or隐藏
+_display(method=none)
+    display method
+
+//溢出处理
+_overflow(method=hidden)
+    overflow method
+
+//按钮样式
+_btnStyle(pixel=5px,padding=0 6px)
+    -webkit-border-radius pixel
+    -moz-border-radius pixel
+    border-radius pixel
+    padding padding
+
+//按钮颜色皮肤
+_btnColor(color=$color_black,bgColor=$color_gray)
+    background-color bgColor
+    color color
+
+//按钮颜色皮肤
+_btnHoverColorP(color=$color_black,bgColor=$color_gray)
+    &:active
+        background-color bgColor - 10%
+        color color
+_btnHoverColorN(color=$color_black,bgColor=$color_gray)
+    &:active
+        background-color bgColor + 10%
+        color color
+
+//垂直布局
+_verticalLayout(left=auto,right=auto)
+    position absolute
+    top 0
+    bottom 0
+    margin auto 
+    left left
+    right right
+
+//字体间隔
+_spacing(pixel=1px)
+    letter-spacing pixel
+
+//完美版
+_spacingPlus(pixel=1px)
+    letter-spacing pixel
+    text-indent pixel
+
+//圆角
+_borderRadius(pixel=50%)
+    -webkit-border-radius pixel
+    -moz-border-radius pixel
+    border-radius pixel
+
+//线性渐变
+_gradient(bColor,eColor)
+    background -webkit-linear-gradient(left top, bColor, eColor)
+    background -o-linear-gradient(bottom right, bColor, eColor)
+    background -moz-linear-gradient(bottom right, bColor, eColor)
+    background linear-gradient(to bottom right, bColor, eColor)
+
+*
+    margin 0
+    padding 0
+html
+    *
+        outline none
+        -webkit-text-size-adjust none
+        -webkit-tap-highlight-color rgba(0,0,0,0)
+a   
+    text-decoration none
+ul,li
+    list-style none
+body
+    background $color_w1
+    color $color_black
+    line-height 1.5
+    font $fontSize_small $fontFamily
+
+//禁止用户选中
+.user-unselect{
+    -moz-user-select none
+    -webkit-user-select none
+    -ms-user-select none
+    user-unselect none
+}
+
+.main-view
+    width 10rem
+    position relative
+    margin 0 auto
+    -webkit-box-sizing border-box
+    -box-sizing border-box
+
+.clearfix
+    display table
+    &::before,
+    &::after
+        content ""
+        display table
+    &::after
+        clear both
+.opaque
+    background $color_white
+
+//头部的主要信息
+.basic-info
+    width 100%
+    padding .25rem 0
+    min-height 3.8rem
+    _boder(bottom)
+    font-size $fontSize_normal
+    position relative
+    _box-sizing()
+    padding-left 2.6rem
+    .left
+        position absolute
+        left .4rem
+        top .4rem
+        width 1.8rem
+        height 1.8rem
+    _imgwrap()
+    .infor
+        width 100%
+        _box-sizing()
+        padding .15rem .25rem .15rem 0
+        p
+            line-height .65rem
+            font-size $fontSize_small 
+        p.vinbox
+            line-height .75rem
+            height .75rem
+            _overflow()
+            position relative
+            a.m-btn
+                height .5rem
+                line-height .5rem
+                _verticalLayout(,.15rem)
+                _btnStyle()
+                _btnColor(,$color_gray)
+                _btnHoverColorP(,$color_gray);
+     
+    div.btn-box
+        margin-top .3rem
+        a.m-btn
+            height .5rem
+            line-height .5rem
+            _btnStyle()
+            _btnColor($color_w1,$color_blue)
+            _display(inline-block)
+            _btnHoverColorN($color_w1,$color_blue)
+
+//报告概要
+.listGroup
+    padding .15rem .25rem
+    _boder(bottom)
+    h3
+        font-size $fontSize_medium
+        height 1rem
+        line-height 1rem
+    ul 
+        padding .1rem 0
+        li 
+            height .55rem
+            line-height .55rem
+            _box-sizing()
+            position relative
+            font-size $fontSize_small
+            padding-left .03rem
+            padding-right 3rem
+            &:not(:last-child)
+                margin-bottom .15rem
+            span.title
+                width 100%
+                text-align left
+            span.val
+                _verticalLayout(,.03rem)
+                text-align right
+
+//养护记录
+.maintain
+    padding .15rem .25rem
+    font-size $fontSize_small
+    line-height 1.4
+    .tit
+        position relative
+        z-index 99
+        height 1rem
+        line-height 1rem
+        width 100%
+        position relative
+        h3
+            font-size $fontSize_medium
+        .right-box
+            height .5rem
+            line-height .5rem
+            _verticalLayout(,.15rem)
+            _btnStyle()
+            _btnColor($color_w1,$color_blue)
+            _btnHoverColorN($color_w1,$color_blue)
+            a
+                color inherit
+    .con
+        font-size $fontSize_small
+        padding .2rem 0
+        ul
+            li
+                position relative
+                _box-sizing()
+                padding-left 2.25rem
+                .time-box
+                    width 2rem
+                    height .7rem
+                    line-height .7rem
+                    text-align center
+                    _verticalLayout(0,)
+                    top .25rem
+                    bottom auto
+                .infor-box
+                    width 100%
+                    _boder(left,($color_blue+80%),2px)    
+                    _box-sizing()
+                    padding-left .35rem
+                    position relative
+                    &:before
+                        content ""
+                        _display(block)
+                        width .2rem
+                        height .2rem
+                        background-color $color_blue
+                        _verticalLayout(-.1rem,)
+                        top .5rem
+                        bottom auto
+                        margin-left -1px
+                        _borderRadius()
+                    & >*
+                        line-height 1.4
+                    .mileage
+                        position relative
+                        height .5rem
+                        line-height .5rem
+                        padding-right 75px
+                        .bar-wrap
+                            width 100%
+                            height .5rem
+                            position relative
+                            .progress-bar
+                                width 98%
+                                height .12rem
+                                background $color_w2
+                                _verticalLayout(0)
+                                _borderRadius(.08rem)
+                                .gray-bar
+                                    height 100%
+                                    _borderRadius(.08rem)
+                                    _gradient($color_blue + 30%,$color_blue + 8deg)
+
+                        span.mile
+                            width 75px
+                            _verticalLayout(,0)
+                            _display(block)
+                            text-align right
+                    .pinfo
+                        line-height .5rem
+                        padding-bottom .1rem
+                        span.title
+                            color $color_g1
+                            margin-right .08rem
+                        span.val
+                            &.special
+                                color $color_blue
+
+
+
+
+//底部的免责声明
+.statement
+    _boder(top)
+    padding .25rem
+    margin-top .1rem
+    background $color_white
+    .statementTit
+        h3
+            text-align center
+            line-height .85rem
+            height .85rem
+            margin-bottom .20rem
+            font-size 15px
+            _spacingPlus()
+            position relative
+            span,i
+                _display(inline-block)
+                vertical-align middle
+            i.warn-ico
+                width .5rem
+                height .5rem
+                margin-right .2rem
+                position relative
+                &::before
+                    content ""
+                    _display(block)
+                    width .5rem
+                    height .5rem
+                    position absolute
+                    top 0
+                    left 0
+                    background url(../img/warn_01.png) 0 0 no-repeat
+                    background-size 100% 100%
+            span
+                height .85rem
+            
+
+    .statementCon
+        p
+            color $color_black + 30%
+            line-height 1.5
+            margin-bottom .25rem
+            _spacing()
+
+
+
+
