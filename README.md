@@ -60,9 +60,9 @@ myc_m_new是在原有项目基础（作者：yyd）上进行拓展的页面
 
 6. 相关插件的使用
 
-7. flexible的介绍
+7. flexible.js的介绍
 
-8. geekyu的使用
+8. geekyu.js的使用
 
 
 
