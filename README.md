@@ -4,9 +4,9 @@ myc_m_new是在原有项目基础（作者：yyd）上进行拓展的页面，�
 
 **项目拓展**
 
-* [访问木有车移动端（https://www.muyouche.com/）](https://www.muyouche.com/) 
+* [访问木有车移动端（https://www.muyouche.com/mo/）](https://www.muyouche.com/mo/) 
 
-* [访问木有车PC（http://www.muyouche.com/pc/）](http://www.muyouche.com/pc/) 
+* [访问木有车PC（https://www.muyouche.com/pc/）](https://www.muyouche.com/pc/) 
 
 * [访问f7项目【熊猫旅行移动端】（http://www.zfulz.com/pro/pandaFront_mobile/）](http://www.zfulz.com/pro/pandaFront_mobile/) 
 
