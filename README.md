@@ -19,14 +19,14 @@ myc_m_new是在原有项目基础（作者：yyd）上进行拓展的页面
 
 1. node安装
    
-    a.下载对应安装包[node.js下载地址](http://nodejs.cn/download/)
+    a. 下载对应安装包[node.js下载地址](http://nodejs.cn/download/)
 
-    b.在cmd命令控制台测试node是否安装成功  
+    b. 在cmd命令控制台测试node是否安装成功  
     
         node -v
         npm -v
 
-    c.环境变量配置
+    c. 环境变量配置
 
         计算机-->属性-->高级-->环境变量
 
@@ -36,7 +36,7 @@ myc_m_new是在原有项目基础（作者：yyd）上进行拓展的页面
 		系统变量中的 path
 		;C:\Program Files\nodejs\  
 
-    <font color="#ff4433">注意： 高版本node.msi安装的会自动给给环境变量赋值</font>
+		****注意： 高版本node.msi安装的会自动给给环境变量赋值****
         
 
 
