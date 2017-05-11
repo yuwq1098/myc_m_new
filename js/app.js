@@ -51,12 +51,27 @@
       //               console.log(res);
       //           }
       //       })
+            // 基本信息
+            var basic = new Vue({
+                el: '#basic-info',
+                data: '',
+            })
+            // 报告概要
+            var listGroup = new Vue({
+                el: '#listGroup',
+                data: '',
+            })
+            // 养护记录
+            var record = new Vue({
+                el: '#record-list',
+                data: '',
+            })
             $$.ajax({
                 url: "report.json",
                 type:'GET',
                 dataType: "json",
                 success:function(res){
-                    console.log(res);
+                    record.data = res.data;
                 }
             });
         }

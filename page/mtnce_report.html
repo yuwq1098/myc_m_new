@@ -18,6 +18,8 @@
     <meta name="description" content="木有车汽车服务平台(m.muyouche.com)">
     <title>木有车_车辆检测报告详情</title>
     <link href="../css/app.css" rel="stylesheet" type="text/css">
+    <!--引入vue-->
+    <script src="../js/vue.min.js"></script>
     <!--调用弹性布局js-->
     <script src="../js/flexible.js"></script>
     <script src="../js/app.js"></script>
@@ -29,7 +31,7 @@
   <body oncontextmenu="return false" class="user-unselect">
     <div class="main-view opaque">
       <!--主要信息-->
-      <section class="basic-info clearfix">
+      <section id="basic-info" class="basic-info clearfix">
         <div class="left imgwrap"><img src="../img/b25.jpg" alt="汽车品牌LOGO"></div>
         <div class="infor">
           <p>大众 帕萨特领驭</p>
@@ -41,7 +43,7 @@
         </div>
       </section>
       <!--报告概要-->
-      <section class="listGroup">
+      <section id="listGroup" class="listGroup">
         <h3>报告概要</h3>
         <ul>
           <li><span class="title">最后进店时间：</span><span class="val">2015-11-17</span></li>
@@ -332,6 +334,11 @@
                 <div style="display:none" class="moreArrow"><img src="../img/u258.png" style="display: none;"><img src="../img/u358.png"></div>
               </section>
             </li>
+          </ul>
+        </div>
+        <div id="record-list" class="con">
+          <ul class="record-list">
+            <li v-for="n in 10">{{ n }}</li>
           </ul>
         </div>
       </section>

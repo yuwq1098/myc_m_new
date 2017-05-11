@@ -18,6 +18,8 @@ html
         meta(name="description" content="木有车汽车服务平台(m.muyouche.com)")
         title 木有车_车辆检测报告详情
         link(href="../css/app.css", rel="stylesheet", type="text/css")
+        //引入vue
+        script(src="../js/vue.min.js")
         //调用弹性布局js
         script(src="../js/flexible.js")
         script(src="../js/app.js")
@@ -30,7 +32,7 @@ html
         
         .main-view.opaque
             //主要信息
-            section.basic-info.clearfix
+            section#basic-info.basic-info.clearfix
                 .left.imgwrap
                     img(src="../img/b25.jpg" alt="汽车品牌LOGO")
                 .infor
@@ -45,7 +47,7 @@ html
                         a.m-btn.m-btn-blue(href="check_config.html") 校验配置
             
             //报告概要
-            section.listGroup
+            section#listGroup.listGroup
                 h3 报告概要
                 ul
                     li
@@ -101,7 +103,10 @@ html
                                     .moreArrow(style="display:none")
                                         img(src="../img/u258.png",style="display: none;")
                                         img(src="../img/u358.png")
-
+                .con#record-list
+                    ul.record-list
+                        li(v-for="n in 10")
+                            {{ n }}
 
             //免责条款
             section.statement
