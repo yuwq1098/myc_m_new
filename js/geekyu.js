@@ -1475,7 +1475,6 @@
 				dom=dom.offsetParent;	
 				i++;
 			}		
-
 			return value;
 		};
 

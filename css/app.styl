@@ -3,21 +3,54 @@
 // 变量前缀为$ ,方法前缀为_
 
 //颜色变量
+//白色
 $color_white = #fff
 $color_w1 = #f4f4f4
-$color_w2 = #ededed
+$color_w2 = $color_w1 - 8%
+$color_w3 = $color_w2 - 8%
+$color_w4 = $color_w3 - 8%
+//黑色
 $color_black = #313536
+$color_bk_a = $color_black + 8%
+$color_bk_b = $color_bk_a + 8%
+$color_bk_c = $color_bk_b + 8%
+$color_bk_d = $color_bk_c + 8%
+//灰色
 $color_gray = #b2b2b2
-$color_g1 = #a4a4a4
-$color_g2 = #959595
-$color_vital = #f43
+$color_g1 = $color_gray - 8%
+$color_g2 = $color_g1 - 8%
+$color_g3 = $color_g2 - 8%
+$color_g4 = $color_g3 - 8%
+//红色
+$color_red = #f43
+$color_r1 = $color_red - 8%
+$color_r2 = $color_r1 - 8%
+$color_r3 = $color_r2 - 8%
+$color_r4 = $color_r3 - 8%
+$color_r_a = $color_red + 8%
+$color_r_b = $color_r_a - 8%
+$color_r_c = $color_r_b - 8%
+$color_r_d = $color_r_c - 8%
+//蓝色
 $color_blue = #3c89fd
+$color_be1 = $color_blue - 8%
+$color_be2 = $color_be1 - 8%
+$color_be3 = $color_be2 - 8%
+$color_be4 = $color_be3 - 8%
+$color_be_a = $color_blue + 8%
+$color_be_b = $color_be_a + 8%
+$color_be_c = $color_be_b + 8%
+$color_be_d = $color_be_c + 8%
+$color_be_d1 = $color_blue - 8deg
+$color_be_d2 = $color_be_d1 - 8deg
+$color_be_1d = $color_blue + 8deg
+$color_be_2d = $color_be_1d + 8deg
 
 
 //字体大小变量
 $fontSize_small  = 12px
 $fontSize_normal = 13px
-$fontSize_medium = 16px
+$fontSize_medium = 15px
 $fontSize_large  = 22px
 $fontSize_super  = 30px
 
@@ -29,7 +62,7 @@ _boder(direction,color=$color_w2,pixel=1px)
     border-{direction} pixel solid color;
 
 //严格盒模型
-_box-sizing()
+_boxSizing()
     -webkit-box-sizing border-box
     box-sizing border-box
 
@@ -56,16 +89,16 @@ _btnStyle(pixel=5px,padding=0 6px)
     padding padding
 
 //按钮颜色皮肤
-_btnColor(color=$color_black,bgColor=$color_gray)
+_btnColor(color=$color_bk_a,bgColor=$color_gray)
     background-color bgColor
     color color
 
 //按钮颜色皮肤
-_btnHoverColorP(color=$color_black,bgColor=$color_gray)
+_btnHoverColorP(color=$color_bk_a,bgColor=$color_gray)
     &:active
         background-color bgColor - 10%
         color color
-_btnHoverColorN(color=$color_black,bgColor=$color_gray)
+_btnHoverColorN(color=$color_bk_a,bgColor=$color_gray)
     &:active
         background-color bgColor + 10%
         color color
@@ -101,6 +134,29 @@ _gradient(bColor,eColor)
     background -moz-linear-gradient(bottom right, bColor, eColor)
     background linear-gradient(to bottom right, bColor, eColor)
 
+//前后加线
+_abSolid(color=$color_w3,pixel=1px)
+    &::before,
+    &::after
+        content ""
+        _display(block)
+        width 100%
+        height pixel
+        position absolute
+        left 0
+        -webkit-transform scaleY(.5)
+        transform scaleY(.5)
+    &::before
+        top 0
+        _boder(top,(color))
+        -webkit-transform-origin 0 0
+        transform-origin 0 0
+    &::after
+        bottom 0
+        _boder(bottom,(color))
+        -webkit-transform-origin 0 100%
+        transform-origin 0 100%
+
 *
     margin 0
     padding 0
@@ -120,12 +176,18 @@ body
     font $fontSize_small $fontFamily
 
 //禁止用户选中
-.user-unselect{
+.user-unselect
     -moz-user-select none
     -webkit-user-select none
     -ms-user-select none
     user-unselect none
-}
+
+//隐藏box
+.box-hidden
+    display none
+//显示box
+.box-show
+    display block
 
 .main-view
     width 10rem
@@ -153,7 +215,7 @@ body
     _boder(bottom)
     font-size $fontSize_normal
     position relative
-    _box-sizing()
+    _boxSizing()
     padding-left 2.6rem
     .left
         position absolute
@@ -164,11 +226,12 @@ body
     _imgwrap()
     .infor
         width 100%
-        _box-sizing()
+        _boxSizing()
         padding .15rem .25rem .15rem 0
         p
             line-height .65rem
             font-size $fontSize_small 
+            color $color_bk_b
         p.vinbox
             line-height .75rem
             height .75rem
@@ -205,8 +268,9 @@ body
         li 
             height .55rem
             line-height .55rem
-            _box-sizing()
             position relative
+            color $color_bk_b
+            _boxSizing()
             font-size $fontSize_small
             padding-left .03rem
             padding-right 3rem
@@ -241,6 +305,8 @@ body
             _btnColor($color_w1,$color_blue)
             _btnHoverColorN($color_w1,$color_blue)
             a
+                height .5rem
+                line-height .5rem
                 color inherit
     .con
         font-size $fontSize_small
@@ -248,7 +314,8 @@ body
         ul
             li
                 position relative
-                _box-sizing()
+                color $color_bk_b
+                _boxSizing()
                 padding-left 2.25rem
                 .time-box
                     width 2rem
@@ -261,7 +328,7 @@ body
                 .infor-box
                     width 100%
                     _boder(left,($color_blue+80%),2px)    
-                    _box-sizing()
+                    _boxSizing()
                     padding-left .35rem
                     position relative
                     &:before
@@ -295,7 +362,7 @@ body
                                 .gray-bar
                                     height 100%
                                     _borderRadius(.08rem)
-                                    _gradient($color_blue + 30%,$color_blue + 8deg)
+                                    _gradient($color_be_d + 20%,$color_blue + 8deg)
 
                         span.mile
                             width 75px
@@ -313,8 +380,6 @@ body
                                 color $color_blue
 
 
-
-
 //底部的免责声明
 .statement
     _boder(top)
@@ -327,7 +392,8 @@ body
             line-height .85rem
             height .85rem
             margin-bottom .20rem
-            font-size 15px
+            font-size $fontSize_medium
+            color $color_bk_b
             _spacingPlus()
             position relative
             span,i
@@ -354,10 +420,153 @@ body
 
     .statementCon
         p
-            color $color_black + 30%
+            color $color_bk_d
             line-height 1.5
             margin-bottom .25rem
             _spacing()
+
+//配置信息页面
+.group-cells
+    background $color_white
+    line-height 1.4
+    font-size $fontSize_normal
+    overflow hidden
+    position relative
+    .group-cell
+        padding .15rem .3rem
+        height 1.1rem
+        position relative
+        display -webkit-box
+        display -webkit-flex
+        display flex
+        -webkit-box-align center
+        -webkit-align-items center
+        align-items center
+        _boxSizing()
+        font-size $fontSize_small
+        &:not(:last-child)::after
+            content ""
+            _display(block)
+            width 94%
+            height 1px
+            _verticalLayout(0,0)
+            bottom 0
+            top auto
+            _boder(bottom,($color_w1))
+        .cell__bd
+            -webkit-box-flex 1
+            -webkit-flex 1
+            flex 1
+            color $color_bk_b
+            _spacing()
+        .cell__ft
+            width 6rem
+            text-align right
+            color $color_g3
+
+section >.group-cells:not(:first-child)
+    margin-top .25rem
+    background #fff
+section >.group-cells
+    _abSolid()
+
+.config
+    .btn-block
+        padding 0 .3rem
+        font-size $fontSize_medium
+        margin 1rem auto 0
+        width 8.5rem
+        height 1rem
+        line-height 1rem
+        text-align center
+        _spacingPlus(3px)
+        _btnStyle(6px)
+        _btnColor($color_w1,$color_blue)
+        _btnHoverColorN($color_w1,$color_blue)
+
+.moreconfig
+    .group-cell.tit
+        font-size $fontSize_medium
+        .cell__bd
+            text-align center
+    .group-cells .group-cell .cell__ft
+            width 4.8rem
+            overflow hidden
+
+//完整报告页
+.main-view.complete
+    .group-cells
+        .group-cell
+            height .8rem
+            margin-top 0
+            &.tit
+                height 1.1rem
+                font-size $fontSize_medium
+                _boder(bottom,($color_w1))
+                &::after
+                    _display(none)
+                i.iconfont
+                    font-size 17px
+                    color $color_blue
+                    margin-right 3px
+                span
+                    color $color_black
+    .report
+        .group-cells
+            margin-top .25rem
+            _abSolid()
+            .group-cell
+                &.tit
+                    height 1.1rem
+                    border-bottom none
+        .reportlist
+            padding 0 .5rem
+            background #fff
+            ul
+                li
+                    position relative
+                    padding-bottom .2rem
+                    color $color_bk_b
+                    p
+                        position relative
+                        font-size $fontSize_normal
+                        padding 0 .5rem 0 2rem
+                        text-align justify
+                        min-height .6rem
+                        line-height .6rem
+                        span
+                            width 2rem
+                            height .6rem
+                            line-height .6rem
+                            text-align right
+                            color $color_g3
+                            _verticalLayout(0)
+                            top 0
+                            bottom auto
+                            
+        .timedistance 
+            position relative
+            padding-top .15rem
+            margin-bottom .1rem 
+            span
+                width 33.33%
+                line-height .7rem
+                display inline-block
+                font-size $fontSize_normal
+                &:nth-of-type(1)
+                    text-align left
+                &:nth-of-type(2)
+                    text-align center
+                &:nth-of-type(3)
+                    position relative
+                    color $color_blue
+                    text-align right
+    .statement
+        margin-top 0
+
+    
+
+
 
 
 

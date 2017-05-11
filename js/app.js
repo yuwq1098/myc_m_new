@@ -1,23 +1,36 @@
 (function() {
 
-    // ³ö¿ÚÑ¡ÔñÆ÷ÒıÇæ¶¨Òå
-    var $$ = window.geekyu;
+    // å‡ºå£é€‰æ‹©å™¨å¼•æ“å®šä¹‰
+    var $$ = window.geekyu||null;
+    
+    // ç§»åŠ¨ç«¯clickäº‹ä»¶å»¶è¿Ÿ300å¤„ç†ï¼Œè¯·åœ¨å¼•ç”¨æœ¬è„šæœ¬ä¹‹å‰å…ˆå¼•å…¥fastclick.js
+    var FastClick = window.FastClick||null; 
+    if(FastClick){
+        window.onload = function() {
+            FastClick.attach(document.body);
+            console.log("load this fastclick!");
+        }
+    }
 
-    //³µÁ¾¼ì²â±¨¸æÏêÇé
+    //è½¦è¾†æ£€æµ‹æŠ¥å‘Šè¯¦æƒ…
     var mtnce_report = function(){
         window.onload = function(){
             var copyBtn = document.getElementById("copyVIN");
-            var clipboard = new Clipboard(copyBtn,{
-                target: function(trigger){
-                    return trigger.previousSibling;
+            var copyInput = document.getElementById("copyInput");
+            copyBtn.onclick = function(){
+                var vin = this.previousSibling.innerText;
+                vin = vin.replace(/\w{3}\W{1}/, "");
+                copyInput.value = vin;
+                copyInput.select(); // é€‰æ‹©å¯¹è±¡
+                var execCommand = document.execCommand||null;
+                if(execCommand){
+                    document.execCommand("Copy"); // æ‰§è¡Œæµè§ˆå™¨å¤åˆ¶å‘½ä»¤
+                    alert("æˆåŠŸå¤åˆ¶,å¯ç²˜è´´ä½¿ç”¨!");
+                }else{
+                    alert("æ‚¨çš„è®¾å¤‡ä¸æ”¯æŒè‡ªåŠ¨å¤åˆ¶ï¼Œè¯·æ‰‹åŠ¨å¤åˆ¶!");
                 }
-            });
-            clipboard.on("success",function(e){
-                alert("¸´ÖÆ³É¹¦£¬¿ÉÕ³ÌùÊ¹ÓÃ");
-            })
-            clipboard.on("error",function(e){
-                alert("¶Ô²»Æğ£¬ÄúµÄÏµÍ³²»Ö§³Ö×Ô¶¯¸´ÖÆ£¬ÇëÊÖ¶¯¸´ÖÆ");
-            })
+            }
+
 
             console.dir($$.toCamelCase("HTML css"));
             console.log($$.unique([15,25,32,15,24,18])); 
@@ -48,15 +61,26 @@
             });
         }
     }
-	window.mtnce_report = mtnce_report;
+    window.mtnce_report = mtnce_report;
     
-    //Ğ£ÑéÅäÖÃ
+    //æ ¡éªŒé…ç½®
     var check_config = function(){
-        console.log("this is check_config page!")
+        console.log("å‘µå‘µå“’")
+        //æ ¡éªŒé…ç½®çš„DOM
+        var $config = $("section.config");
+        //è¯¦ç»†é…ç½®çš„DOM
+        var $moreconfig = $("section.moreconfig");
+        //æŸ¥çœ‹æ›´å¤šçš„æŒ‰é’®
+        var $lockConfig_btn = $config.find("a#lockConfig");
+
+        $lockConfig_btn.on("click",function(){
+            $config.hide();
+            $moreconfig.show();
+        })
     }
     window.check_config = check_config;
 
-    //¼ì²âÏêÇé--ÍêÕû±¨¸æ
+    //æ£€æµ‹è¯¦æƒ…--å®Œæ•´æŠ¥å‘Š
     var full_mtnce_report = function(){
         console.log("this is full_mtnce_report page!")
     }

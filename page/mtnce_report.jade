@@ -38,6 +38,7 @@ html
                     p.vinbox
                         span VIN：#{data.vin}
                         a#copyVIN.m-btn(href="javascript:;" data-clipboard-target="#copyInput") 复制VIN
+                        input#copyInput(type="hideen" value="")
                     p
                         span 报告生成日期：2017-05-04 11:02:01
                     div.btn-box
@@ -120,8 +121,8 @@ html
             :coffee-script
         // 引用jq库
         script(src="../js/jquery.min.js")
-        // 复制内容到剪切板的脚本
-        script(src="../js/clipboard.min.js")
+        // 移动端click事件延迟修复
+        script(src="../js/fastclick.js")
         script(src="../js/geekyu.js")
         script(src="../js/app.js")
         script(type="text/javascript").

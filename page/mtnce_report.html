@@ -33,7 +33,9 @@
         <div class="left imgwrap"><img src="../img/b25.jpg" alt="汽车品牌LOGO"></div>
         <div class="infor">
           <p>大众 帕萨特领驭</p>
-          <p class="vinbox"><span>VIN：SALMN1D4XCA365699</span><a id="copyVIN" href="javascript:;" data-clipboard-target="#copyInput" class="m-btn">复制VIN</a></p>
+          <p class="vinbox"><span>VIN：SALMN1D4XCA365699</span><a id="copyVIN" href="javascript:;" data-clipboard-target="#copyInput" class="m-btn">复制VIN</a>
+            <input id="copyInput" type="hideen" value="">
+          </p>
           <p><span>报告生成日期：2017-05-04 11:02:01</span></p>
           <div class="btn-box"><a href="check_config.html" class="m-btn m-btn-blue">校验配置</a></div>
         </div>
@@ -355,8 +357,8 @@
     </script>
     <!-- 引用jq库-->
     <script src="../js/jquery.min.js"></script>
-    <!-- 复制内容到剪切板的脚本-->
-    <script src="../js/clipboard.min.js"></script>
+    <!-- 移动端click事件延迟修复-->
+    <script src="../js/fastclick.js"></script>
     <script src="../js/geekyu.js"></script>
     <script src="../js/app.js"></script>
     <script type="text/javascript">mtnce_report();</script>

@@ -22,7 +22,159 @@
     <script src="../js/flexible.js"></script>
   </head>
   <body oncontextmenu="return false" class="user-unselect">
-    <script src="../js/app.js"></script>
+    <div class="main-view">
+      <!--概要配置-->
+      <section class="config">
+        <div class="group-cells">
+          <section class="group-cell">
+            <div class="cell__bd">
+              <p>车架号</p>
+            </div>
+            <div class="cell__ft">LSVD249F982506255</div>
+          </section>
+        </div>
+        <div class="group-cells">
+          <section class="group-cell">
+            <div class="cell__bd">
+              <p>车型</p>
+            </div>
+            <div class="cell__ft">2007款 帕萨特领驭 1.8T 手动豪华型</div>
+          </section>
+          <section class="group-cell">
+            <div class="cell__bd">
+              <p>厂家指导价</p>
+            </div>
+            <div class="cell__ft">19.98万</div>
+          </section>
+          <section class="group-cell">
+            <div class="cell__bd">
+              <p>上市时间</p>
+            </div>
+            <div class="cell__ft">2007</div>
+          </section>
+          <section class="group-cell">
+            <div class="cell__bd">
+              <p>停产年份</p>
+            </div>
+            <div class="cell__ft">2011</div>
+          </section>
+          <section class="group-cell">
+            <div class="cell__bd">
+              <p>排放标准</p>
+            </div>
+            <div class="cell__ft">国4</div>
+          </section>
+        </div>
+        <div class="btn-block"><a id="lockConfig" class="m-btn-full m-btn-blue">查看车辆详细配置</a></div>
+      </section>
+      <!--详细配置信息-->
+      <section class="moreconfig box-hidden">
+        <div class="group-cells">
+          <section class="group-cell tit">
+            <div class="cell__bd">
+              <p>车辆详细配置</p>
+            </div>
+          </section>
+        </div>
+        <div class="group-cells">
+          <section class="group-cell">
+            <div class="cell__bd">
+              <p>2007款 帕萨特领驭 1.8T 手动豪华型</p>
+            </div>
+          </section>
+          <section class="group-cell tit">
+            <div class="cell__bd">
+              <p>基本信息</p>
+            </div>
+          </section>
+          <section class="group-cell">
+            <div class="cell__bd">
+              <p>保修政策</p>
+            </div>
+            <div class="cell__ft">两年或6万公里</div>
+          </section>
+          <section class="group-cell">
+            <div class="cell__bd">
+              <p>排量（升）</p>
+            </div>
+            <div class="cell__ft">1.8</div>
+          </section>
+          <section class="group-cell">
+            <div class="cell__bd">
+              <p>变速箱</p>
+            </div>
+            <div class="cell__ft">5档手动</div>
+          </section>
+          <section class="group-cell">
+            <div class="cell__bd">
+              <p>综合工况油耗（L/100km）</p>
+            </div>
+            <div class="cell__ft">9.50</div>
+          </section>
+          <section class="group-cell">
+            <div class="cell__bd">
+              <p>最高车速（km/h）</p>
+            </div>
+            <div class="cell__ft">208</div>
+          </section>
+          <section class="group-cell">
+            <div class="cell__bd">
+              <p>成员人数（个）</p>
+            </div>
+            <div class="cell__ft">5</div>
+          </section>
+        </div>
+        <div class="group-cells">
+          <section class="group-cell tit">
+            <div class="cell__bd">
+              <p>车体</p>
+            </div>
+          </section>
+          <section class="group-cell">
+            <div class="cell__bd">
+              <p>车身颜色</p>
+            </div>
+            <div class="cell__ft">暂无数据</div>
+          </section>
+          <section class="group-cell">
+            <div class="cell__bd">
+              <p>长（mm）</p>
+            </div>
+            <div class="cell__ft">4789</div>
+          </section>
+          <section class="group-cell">
+            <div class="cell__bd">
+              <p>宽（mm）</p>
+            </div>
+            <div class="cell__ft">1765</div>
+          </section>
+          <section class="group-cell">
+            <div class="cell__bd">
+              <p>高（mm）</p>
+            </div>
+            <div class="cell__ft">1470</div>
+          </section>
+          <section class="group-cell">
+            <div class="cell__bd">
+              <p>轴距（mm）</p>
+            </div>
+            <div class="cell__ft">2803</div>
+          </section>
+          <section class="group-cell">
+            <div class="cell__bd">
+              <p>运动外观套件</p>
+            </div>
+            <div class="cell__ft">暂无数据</div>
+          </section>
+        </div>
+      </section>
+    </div>
+    <!-- 引用jq库-->
+    <script src="../js/jquery.min.js"></script>
+    <!-- 移动端click事件延迟修复-->
+    <script src="../js/fastclick.js"></script>
+    <script src="../js/geekyu.js"></script>
+    <script src="../js/app.js" charset="utf-8"></script>
     <script type="text/javascript">check_config();</script>
   </body>
 </html>
