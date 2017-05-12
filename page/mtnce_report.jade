@@ -38,24 +38,24 @@ html
                 .infor
                     p 大众 帕萨特领驭
                     p.vinbox
-                        span VIN：#{data.vin}
-                        a#copyVIN.m-btn(href="javascript:;" data-clipboard-target="#copyInput") 复制VIN
+                        span VIN：{{data.vin}}
+                        a#copyVIN.m-btn(href="javascript:;") 复制VIN
                         input#copyInput(type="hideen" value="")
                     p
-                        span 报告生成日期：2017-05-04 11:02:01
+                        span 报告生成日期：{{data.reqTime}}
                     div.btn-box
                         a.m-btn.m-btn-blue(href="check_config.html") 校验配置
             
             //报告概要
-            section#listGroup.listGroup
+            section#listGroup.listGroup(v-cloak)
                 h3 报告概要
                 ul
                     li
                         span.title 最后进店时间：
-                        span.val= data.last_time_to_shop
+                        span.val(v-cloak) {{infoList.last_time_to_shop}}
                     li
                         span.title 最后进店里程：
-                        span.val= data.total_mileage
+                        span.val(v-show="infoList") {{infoList.total_mileage}}
                             |万公里
                     li
                         span.title 里程是否异常：
@@ -76,37 +76,31 @@ html
                     h3  重要记录
                     section.right-box
                         a.m-btn.m-btn-blue(href="full_mtnce_report.html") 查看完整报告
-                .con
+                .con#record-list(v-cloak)
                     ul.record-list
-                        -for(var i = 0; i<data.result.length; i++)
-                            -var item = data.result[i]
-                            li 
-                                section.time-box
-                                    span= item.date.substr(0,4)+"年"+item.date.substr(5,2)+"月"
-                                section.infor-box
-                                    .mileage
-                                        -var progress = ((item.mile/data.total_mileage)*100).toFixed(2)
-                                        .bar-wrap
-                                            .progress-bar
-                                                .gray-bar(style="width: #{progress}%")
-                                        span.mile= (item.mile/10000).toFixed(2)
-                                            |万公里
-                                    .pinfo
-                                        span.title 类型：
-                                        span.val.special= item.type
-                                    .pinfo
-                                        span.title 项目：
-                                        span.val= item.detail
-                                    .pinfo
-                                        span.title 材料：
-                                        span.val= item.other
-                                    .moreArrow(style="display:none")
-                                        img(src="../img/u258.png",style="display: none;")
-                                        img(src="../img/u358.png")
-                .con#record-list
-                    ul.record-list
-                        li(v-for="n in 10")
-                            {{ n }}
+                        li(v-for="item in recordItem")
+                            section.time-box
+                                span {{ item.date.substr(0,4)}}年{{item.date.substr(5,2)}}月
+                            section.infor-box
+                                .mileage
+                                    .bar-wrap
+                                        .progress-bar
+                                            .gray-bar(style="width: 50%")
+                                    span.mile {{(item.mile/10000).toFixed(2)}}
+                                        |万公里
+                                .pinfo
+                                    span.title 类型：
+                                    span.val.special {{item.type}}
+                                .pinfo
+                                    span.title 项目：
+                                    span.val {{item.detail}}
+                                .pinfo
+                                    span.title 材料：
+                                    span.val {{item.other}}
+                                .moreArrow(style="display:none")
+                                    img(src="../img/u258.png",style="display: none;")
+                                    img(src="../img/u358.png")
+                            
 
             //免责条款
             section.statement
@@ -128,7 +122,6 @@ html
         script(src="../js/jquery.min.js")
         // 移动端click事件延迟修复
         script(src="../js/fastclick.js")
-        script(src="../js/geekyu.js")
         script(src="../js/app.js")
         script(type="text/javascript").
             mtnce_report();

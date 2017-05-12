@@ -35,19 +35,21 @@
         <div class="left imgwrap"><img src="../img/b25.jpg" alt="汽车品牌LOGO"></div>
         <div class="infor">
           <p>大众 帕萨特领驭</p>
-          <p class="vinbox"><span>VIN：SALMN1D4XCA365699</span><a id="copyVIN" href="javascript:;" data-clipboard-target="#copyInput" class="m-btn">复制VIN</a>
+          <p class="vinbox"><span>VIN：{{data.vin}}</span><a id="copyVIN" href="javascript:;" class="m-btn">复制VIN</a>
             <input id="copyInput" type="hideen" value="">
           </p>
-          <p><span>报告生成日期：2017-05-04 11:02:01</span></p>
+          <p><span>报告生成日期：{{data.reqTime}}</span></p>
           <div class="btn-box"><a href="check_config.html" class="m-btn m-btn-blue">校验配置</a></div>
         </div>
       </section>
       <!--报告概要-->
-      <section id="listGroup" class="listGroup">
+      <section id="listGroup" v-cloak class="listGroup">
         <h3>报告概要</h3>
         <ul>
-          <li><span class="title">最后进店时间：</span><span class="val">2015-11-17</span></li>
-          <li><span class="title">最后进店里程：</span><span class="val">80348万公里</span></li>
+          <li><span class="title">最后进店时间：</span><span v-cloak class="val">{{infoList.last_time_to_shop}}</span></li>
+          <li><span class="title">最后进店里程：</span><span v-show="infoList" class="val">
+              {{infoList.total_mileage}}
+              万公里</span></li>
           <li><span class="title">里程是否异常：</span><span class="val">否</span></li>
           <li><span class="title">三大件维修记录：</span><span class="val">暂无</span></li>
           <li><span class="title">火烧、泡水：</span><span class="val">暂无</span></li>
@@ -60,285 +62,26 @@
           <h3> 重要记录</h3>
           <section class="right-box"><a href="full_mtnce_report.html" class="m-btn m-btn-blue">查看完整报告</a></section>
         </div>
-        <div class="con">
+        <div id="record-list" v-cloak class="con">
           <ul class="record-list">
-            <li> 
-              <section class="time-box"><span>2015年11月</span></section>
+            <li v-for="item in recordItem">
+              <section class="time-box"><span>{{ item.date.substr(0,4)}}年{{item.date.substr(5,2)}}月</span></section>
               <section class="infor-box">
                 <div class="mileage">
                   <div class="bar-wrap">
                     <div class="progress-bar">
-                      <div style="width: 100.00%" class="gray-bar"></div>
+                      <div style="width: 50%" class="gray-bar"></div>
                     </div>
-                  </div><span class="mile">8.03万公里</span>
+                  </div><span class="mile">
+                    {{(item.mile/10000).toFixed(2)}}
+                    万公里</span>
                 </div>
-                <div class="pinfo"><span class="title">类型：</span><span class="val special">一般维修</span></div>
-                <div class="pinfo"><span class="title">项目：</span><span class="val">清洗节气门;发动机故障灯亮</span></div>
-                <div class="pinfo"><span class="title">材料：</span><span class="val">化油器清洗剂;前雨刮片;化油器清洗剂</span></div>
+                <div class="pinfo"><span class="title">类型：</span><span class="val special">{{item.type}}</span></div>
+                <div class="pinfo"><span class="title">项目：</span><span class="val">{{item.detail}}</span></div>
+                <div class="pinfo"><span class="title">材料：</span><span class="val">{{item.other}}</span></div>
                 <div style="display:none" class="moreArrow"><img src="../img/u258.png" style="display: none;"><img src="../img/u358.png"></div>
               </section>
             </li>
-            <li> 
-              <section class="time-box"><span>2014年11月</span></section>
-              <section class="infor-box">
-                <div class="mileage">
-                  <div class="bar-wrap">
-                    <div class="progress-bar">
-                      <div style="width: 98.09%" class="gray-bar"></div>
-                    </div>
-                  </div><span class="mile">7.88万公里</span>
-                </div>
-                <div class="pinfo"><span class="title">类型：</span><span class="val special">一般维修</span></div>
-                <div class="pinfo"><span class="title">项目：</span><span class="val">1、是否需要洗车;是;否;发动机灯亮</span></div>
-                <div class="pinfo"><span class="title">材料：</span><span class="val"></span></div>
-                <div style="display:none" class="moreArrow"><img src="../img/u258.png" style="display: none;"><img src="../img/u358.png"></div>
-              </section>
-            </li>
-            <li> 
-              <section class="time-box"><span>2014年01月</span></section>
-              <section class="infor-box">
-                <div class="mileage">
-                  <div class="bar-wrap">
-                    <div class="progress-bar">
-                      <div style="width: 74.74%" class="gray-bar"></div>
-                    </div>
-                  </div><span class="mile">6.01万公里</span>
-                </div>
-                <div class="pinfo"><span class="title">类型：</span><span class="val special">索赔</span></div>
-                <div class="pinfo"><span class="title">项目：</span><span class="val">客户反应车子发不动;更换汽油泵</span></div>
-                <div class="pinfo"><span class="title">材料：</span><span class="val"></span></div>
-                <div style="display:none" class="moreArrow"><img src="../img/u258.png" style="display: none;"><img src="../img/u358.png"></div>
-              </section>
-            </li>
-            <li> 
-              <section class="time-box"><span>2014年01月</span></section>
-              <section class="infor-box">
-                <div class="mileage">
-                  <div class="bar-wrap">
-                    <div class="progress-bar">
-                      <div style="width: 74.74%" class="gray-bar"></div>
-                    </div>
-                  </div><span class="mile">6.01万公里</span>
-                </div>
-                <div class="pinfo"><span class="title">类型：</span><span class="val special">一般修理</span></div>
-                <div class="pinfo"><span class="title">项目：</span><span class="val">更换汽油滤芯</span></div>
-                <div class="pinfo"><span class="title">材料：</span><span class="val"></span></div>
-                <div style="display:none" class="moreArrow"><img src="../img/u258.png" style="display: none;"><img src="../img/u358.png"></div>
-              </section>
-            </li>
-            <li> 
-              <section class="time-box"><span>2013年12月</span></section>
-              <section class="infor-box">
-                <div class="mileage">
-                  <div class="bar-wrap">
-                    <div class="progress-bar">
-                      <div style="width: 74.21%" class="gray-bar"></div>
-                    </div>
-                  </div><span class="mile">5.96万公里</span>
-                </div>
-                <div class="pinfo"><span class="title">类型：</span><span class="val special">一般修理</span></div>
-                <div class="pinfo"><span class="title">项目：</span><span class="val">更换遥控器电池</span></div>
-                <div class="pinfo"><span class="title">材料：</span><span class="val"></span></div>
-                <div style="display:none" class="moreArrow"><img src="../img/u258.png" style="display: none;"><img src="../img/u358.png"></div>
-              </section>
-            </li>
-            <li> 
-              <section class="time-box"><span>2013年12月</span></section>
-              <section class="infor-box">
-                <div class="mileage">
-                  <div class="bar-wrap">
-                    <div class="progress-bar">
-                      <div style="width: 74.19%" class="gray-bar"></div>
-                    </div>
-                  </div><span class="mile">5.96万公里</span>
-                </div>
-                <div class="pinfo"><span class="title">类型：</span><span class="val special">保养</span></div>
-                <div class="pinfo"><span class="title">项目：</span><span class="val">更换机油机滤;清洗节气门;更换变速箱油;检查胎压报警;检查行驶中方向哒哒响，且方向重</span></div>
-                <div class="pinfo"><span class="title">材料：</span><span class="val"></span></div>
-                <div style="display:none" class="moreArrow"><img src="../img/u258.png" style="display: none;"><img src="../img/u358.png"></div>
-              </section>
-            </li>
-            <li> 
-              <section class="time-box"><span>2013年11月</span></section>
-              <section class="infor-box">
-                <div class="mileage">
-                  <div class="bar-wrap">
-                    <div class="progress-bar">
-                      <div style="width: 70.44%" class="gray-bar"></div>
-                    </div>
-                  </div><span class="mile">5.66万公里</span>
-                </div>
-                <div class="pinfo"><span class="title">类型：</span><span class="val special">一般修理</span></div>
-                <div class="pinfo"><span class="title">项目：</span><span class="val">【刮片;-;刮水器;-;套件;-;更新</span></div>
-                <div class="pinfo"><span class="title">材料：</span><span class="val"></span></div>
-                <div style="display:none" class="moreArrow"><img src="../img/u258.png" style="display: none;"><img src="../img/u358.png"></div>
-              </section>
-            </li>
-            <li> 
-              <section class="time-box"><span>2013年08月</span></section>
-              <section class="infor-box">
-                <div class="mileage">
-                  <div class="bar-wrap">
-                    <div class="progress-bar">
-                      <div style="width: 63.26%" class="gray-bar"></div>
-                    </div>
-                  </div><span class="mile">5.08万公里</span>
-                </div>
-                <div class="pinfo"><span class="title">类型：</span><span class="val special">事故维修</span></div>
-                <div class="pinfo"><span class="title">项目：</span><span class="val">更换右前门及右后门/右后叶修复;右前门/右后门/右后叶喷漆</span></div>
-                <div class="pinfo"><span class="title">材料：</span><span class="val"></span></div>
-                <div style="display:none" class="moreArrow"><img src="../img/u258.png" style="display: none;"><img src="../img/u358.png"></div>
-              </section>
-            </li>
-            <li> 
-              <section class="time-box"><span>2013年08月</span></section>
-              <section class="infor-box">
-                <div class="mileage">
-                  <div class="bar-wrap">
-                    <div class="progress-bar">
-                      <div style="width: 63.26%" class="gray-bar"></div>
-                    </div>
-                  </div><span class="mile">5.08万公里</span>
-                </div>
-                <div class="pinfo"><span class="title">类型：</span><span class="val special">保养</span></div>
-                <div class="pinfo"><span class="title">项目：</span><span class="val">更换机油机滤;清洗节气门;更换刹车油</span></div>
-                <div class="pinfo"><span class="title">材料：</span><span class="val"></span></div>
-                <div style="display:none" class="moreArrow"><img src="../img/u258.png" style="display: none;"><img src="../img/u358.png"></div>
-              </section>
-            </li>
-            <li> 
-              <section class="time-box"><span>2013年03月</span></section>
-              <section class="infor-box">
-                <div class="mileage">
-                  <div class="bar-wrap">
-                    <div class="progress-bar">
-                      <div style="width: 49.65%" class="gray-bar"></div>
-                    </div>
-                  </div><span class="mile">3.99万公里</span>
-                </div>
-                <div class="pinfo"><span class="title">类型：</span><span class="val special">保养</span></div>
-                <div class="pinfo"><span class="title">项目：</span><span class="val">更换机油机滤;清洗节气门;喇叭按键不灵敏已处理;建议下次更换前刹车片</span></div>
-                <div class="pinfo"><span class="title">材料：</span><span class="val"></span></div>
-                <div style="display:none" class="moreArrow"><img src="../img/u258.png" style="display: none;"><img src="../img/u358.png"></div>
-              </section>
-            </li>
-            <li> 
-              <section class="time-box"><span>2012年11月</span></section>
-              <section class="infor-box">
-                <div class="mileage">
-                  <div class="bar-wrap">
-                    <div class="progress-bar">
-                      <div style="width: 39.37%" class="gray-bar"></div>
-                    </div>
-                  </div><span class="mile">3.16万公里</span>
-                </div>
-                <div class="pinfo"><span class="title">类型：</span><span class="val special">保养</span></div>
-                <div class="pinfo"><span class="title">项目：</span><span class="val">保养;更换机油机滤/空气格;清洗节气门体;检查刹车有异响</span></div>
-                <div class="pinfo"><span class="title">材料：</span><span class="val"></span></div>
-                <div style="display:none" class="moreArrow"><img src="../img/u258.png" style="display: none;"><img src="../img/u358.png"></div>
-              </section>
-            </li>
-            <li> 
-              <section class="time-box"><span>2012年08月</span></section>
-              <section class="infor-box">
-                <div class="mileage">
-                  <div class="bar-wrap">
-                    <div class="progress-bar">
-                      <div style="width: 19.14%" class="gray-bar"></div>
-                    </div>
-                  </div><span class="mile">1.54万公里</span>
-                </div>
-                <div class="pinfo"><span class="title">类型：</span><span class="val special">事故维修</span></div>
-                <div class="pinfo"><span class="title">项目：</span><span class="val">加装脚踏板</span></div>
-                <div class="pinfo"><span class="title">材料：</span><span class="val"></span></div>
-                <div style="display:none" class="moreArrow"><img src="../img/u258.png" style="display: none;"><img src="../img/u358.png"></div>
-              </section>
-            </li>
-            <li> 
-              <section class="time-box"><span>2012年07月</span></section>
-              <section class="infor-box">
-                <div class="mileage">
-                  <div class="bar-wrap">
-                    <div class="progress-bar">
-                      <div style="width: 26.56%" class="gray-bar"></div>
-                    </div>
-                  </div><span class="mile">2.13万公里</span>
-                </div>
-                <div class="pinfo"><span class="title">类型：</span><span class="val special">事故维修</span></div>
-                <div class="pinfo"><span class="title">项目：</span><span class="val">Q尾盖;后杠拆装修复;M后杠;后盖油漆;Q钢圈;饰板加工修复</span></div>
-                <div class="pinfo"><span class="title">材料：</span><span class="val"></span></div>
-                <div style="display:none" class="moreArrow"><img src="../img/u258.png" style="display: none;"><img src="../img/u358.png"></div>
-              </section>
-            </li>
-            <li> 
-              <section class="time-box"><span>2012年07月</span></section>
-              <section class="infor-box">
-                <div class="mileage">
-                  <div class="bar-wrap">
-                    <div class="progress-bar">
-                      <div style="width: 26.56%" class="gray-bar"></div>
-                    </div>
-                  </div><span class="mile">2.13万公里</span>
-                </div>
-                <div class="pinfo"><span class="title">类型：</span><span class="val special">保养</span></div>
-                <div class="pinfo"><span class="title">项目：</span><span class="val">更换机油\机油格\清洗节气门;清洗</span></div>
-                <div class="pinfo"><span class="title">材料：</span><span class="val"></span></div>
-                <div style="display:none" class="moreArrow"><img src="../img/u258.png" style="display: none;"><img src="../img/u358.png"></div>
-              </section>
-            </li>
-            <li> 
-              <section class="time-box"><span>2012年05月</span></section>
-              <section class="infor-box">
-                <div class="mileage">
-                  <div class="bar-wrap">
-                    <div class="progress-bar">
-                      <div style="width: 19.14%" class="gray-bar"></div>
-                    </div>
-                  </div><span class="mile">1.54万公里</span>
-                </div>
-                <div class="pinfo"><span class="title">类型：</span><span class="val special">保养</span></div>
-                <div class="pinfo"><span class="title">项目：</span><span class="val">更换机油\机油格\清洗节气门;“路”上有我-“豹”您无忧---夏</span></div>
-                <div class="pinfo"><span class="title">材料：</span><span class="val"></span></div>
-                <div style="display:none" class="moreArrow"><img src="../img/u258.png" style="display: none;"><img src="../img/u358.png"></div>
-              </section>
-            </li>
-            <li> 
-              <section class="time-box"><span>2012年02月</span></section>
-              <section class="infor-box">
-                <div class="mileage">
-                  <div class="bar-wrap">
-                    <div class="progress-bar">
-                      <div style="width: 7.74%" class="gray-bar"></div>
-                    </div>
-                  </div><span class="mile">0.62万公里</span>
-                </div>
-                <div class="pinfo"><span class="title">类型：</span><span class="val special">保养</span></div>
-                <div class="pinfo"><span class="title">项目：</span><span class="val">更换机油\机油格\清洗节气门</span></div>
-                <div class="pinfo"><span class="title">材料：</span><span class="val"></span></div>
-                <div style="display:none" class="moreArrow"><img src="../img/u258.png" style="display: none;"><img src="../img/u358.png"></div>
-              </section>
-            </li>
-            <li> 
-              <section class="time-box"><span>2011年11月</span></section>
-              <section class="infor-box">
-                <div class="mileage">
-                  <div class="bar-wrap">
-                    <div class="progress-bar">
-                      <div style="width: 0.01%" class="gray-bar"></div>
-                    </div>
-                  </div><span class="mile">0.00万公里</span>
-                </div>
-                <div class="pinfo"><span class="title">类型：</span><span class="val special">新车交车前检查</span></div>
-                <div class="pinfo"><span class="title">项目：</span><span class="val"></span></div>
-                <div class="pinfo"><span class="title">材料：</span><span class="val"></span></div>
-                <div style="display:none" class="moreArrow"><img src="../img/u258.png" style="display: none;"><img src="../img/u358.png"></div>
-              </section>
-            </li>
-          </ul>
-        </div>
-        <div id="record-list" class="con">
-          <ul class="record-list">
-            <li v-for="n in 10">{{ n }}</li>
           </ul>
         </div>
       </section>
@@ -366,7 +109,6 @@
     <script src="../js/jquery.min.js"></script>
     <!-- 移动端click事件延迟修复-->
     <script src="../js/fastclick.js"></script>
-    <script src="../js/geekyu.js"></script>
     <script src="../js/app.js"></script>
     <script type="text/javascript">mtnce_report();</script>
   </body>

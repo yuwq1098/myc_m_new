@@ -8,7 +8,6 @@
     if(FastClick){
         window.onload = function() {
             FastClick.attach(document.body);
-            console.log("load this fastclick!");
         }
     }
 
@@ -45,46 +44,48 @@
 
     //车辆检测报告详情
     var mtnce_report = function(){
-        window.onload = function(){
-            var copyBtn = document.getElementById("copyVIN");
-            var copyInput = document.getElementById("copyInput");
             var Guid=0;
             if(window.location.search.match('Guid')){
                 Guid = strToJson().Guid;   
             }
-           
             var URL = "https://www.muyouche.com/action/getChaBaoYangRltByGuid.ashx?Guid="+ Guid;
-            console.log(URL);
-
-            copyBtn.onclick = function(){
-                var vin = this.previousSibling.innerText;
-                vin = vin.replace(/\w{3}\W{1}/, "");
-                copyInput.value = vin;
-                copyInput.select(); // 选择对象
-                var execCommand = document.execCommand||null;
-                if(execCommand){
-                    document.execCommand("Copy"); // 执行浏览器复制命令
-                    alert("成功复制,可粘贴使用!");
-                }else{
-                    alert("您的设备不支持自动复制，请手动复制!");
-                }
-            }
             // 基本信息
             var basic = new Vue({
                 el: '#basic-info',
                 data: {
                     data: {},
+                    cvin: "",
+                },
+                methods: {
+                	copyVIN: function(){
+                		var vin = this.data.vin;
+                		var copyInput = $("#copyInput");
+                		this.cvin = vin;
+//              		js执行顺序的问题
+                		setTimeout(function(){
+                			copyInput.select(); // 选择对象
+                			var execCommand = document.execCommand||null;
+                			if(execCommand){
+			                    document.execCommand("Copy"); // 执行浏览器复制命令
+			                    alert("成功复制,可粘贴使用!");
+			                }else{
+			                    alert("您的设备不支持自动复制，请手动复制!");
+			                }
+                		})
+                	}
                 },
                 mounted: function(){
                     var _this = this;
                     $.ajax({
-                        url: "report.json",
+                        url: URL,
                         type:'GET',
                         dataType: "json",
                         success:function(res){
                             _this.data = res.data;
                         }
                     });
+                    
+                    
                 }
             })
             // 报告概要
@@ -96,7 +97,7 @@
                 mounted: function(){
                     var _this = this;
                     $.ajax({
-                        url: "report.json",
+                        url: URL,
                         type:'GET',
                         dataType: "json",
                         success:function(res){
@@ -114,7 +115,7 @@
                 mounted: function(){
                     var _this = this;
                     $.ajax({
-                        url: "report.json",
+                        url: URL,
                         type:'GET',
                         dataType: "json",
                         success:function(res){
@@ -124,8 +125,6 @@
                 }
             })
             
-            
-        }
     }
     window.mtnce_report = mtnce_report;
     
