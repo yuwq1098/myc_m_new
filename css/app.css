@@ -106,11 +106,11 @@ body {
   -moz-border-radius: 5px;
   border-radius: 5px;
   padding: 0 6px;
-  background-color: #b2b2b2;
+  background-color: #d0d0d0;
   color: #404647;
 }
 .basic-info .infor p.vinbox a.m-btn:active {
-  background-color: #a0a0a0;
+  background-color: #b1b1b1;
   color: #404647;
 }
 .basic-info div.btn-box {
@@ -128,7 +128,7 @@ body {
   display: inline-block;
 }
 .basic-info div.btn-box a.m-btn:active {
-  background-color: #5095fd;
+  background-color: #599bfd;
   color: #f4f4f4;
 }
 .listGroup {
@@ -203,7 +203,7 @@ body {
   color: #f4f4f4;
 }
 .maintain .tit .right-box:active {
-  background-color: #5095fd;
+  background-color: #599bfd;
   color: #f4f4f4;
 }
 .maintain .tit .right-box a {
@@ -464,7 +464,7 @@ section >.group-cells::after {
   color: #f4f4f4;
 }
 .config .btn-block:active {
-  background-color: #5095fd;
+  background-color: #599bfd;
   color: #f4f4f4;
 }
 .moreconfig .group-cell.tit {

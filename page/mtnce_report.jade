@@ -39,8 +39,8 @@ html
                     p 大众 帕萨特领驭
                     p.vinbox
                         span VIN：{{data.vin}}
-                        a#copyVIN.m-btn(href="javascript:;") 复制VIN
-                        input#copyInput(type="hideen" value="")
+                        a#copyVIN.m-btn(@click="copyVIN()") 复制VIN
+                        input#copyInput(type="text" v-model="cvin" style="position: absolute;left: -9999px;")
                     p
                         span 报告生成日期：{{data.reqTime}}
                     div.btn-box
@@ -85,7 +85,7 @@ html
                                 .mileage
                                     .bar-wrap
                                         .progress-bar
-                                            .gray-bar(style="width: 50%")
+                                            .gray-bar(:style="{width: (item.mile/total_mileage*100).toFixed(2)+'%'}")
                                     span.mile {{(item.mile/10000).toFixed(2)}}
                                         |万公里
                                 .pinfo

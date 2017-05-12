@@ -36,25 +36,30 @@
         }
        
         var URL = "https://www.muyouche.com/action/getChaBaoYangRltByGuid.ashx?Guid="+ Guid;
-
-        copyBtn.onclick = function(){
-            var vin = this.previousSibling.innerText;
-            vin = vin.replace(/\w{3}\W{1}/, "");
-            copyInput.value = vin;
-            copyInput.select(); // 选择对象
-            var execCommand = document.execCommand||null;
-            if(execCommand){
-                document.execCommand("Copy"); // 执行浏览器复制命令
-                alert("成功复制,可粘贴使用!");
-            }else{
-                alert("您的设备不支持自动复制，请手动复制!");
-            }
-        }
         // 基本信息
         var basic = new Vue({
             el: '#basic-info',
             data: {
                 data: {},
+                cvin: "",
+            },
+            methods: {
+                copyVIN: function(){
+                    var vin = this.data.vin;
+                    var copyInput = $("#copyInput");
+                    this.cvin = vin;
+                    //js执行顺序的问题
+                    setTimeout(function(){
+                        copyInput.select(); // 选择对象
+                        var execCommand = document.execCommand||null;
+                        if(execCommand){
+                            document.execCommand("Copy"); // 执行浏览器复制命令
+                            alert("成功复制,可粘贴使用!");
+                        }else{
+                            alert("您的设备不支持自动复制，请手动复制!");
+                        }
+                    })
+                }
             },
             mounted: function(){
                 var _this = this;
@@ -91,6 +96,7 @@
             el: '#record-list',
             data: {
                 recordItem: [],
+                total_mileage: "",
             },
             mounted: function(){
                 var _this = this;
@@ -100,6 +106,7 @@
                     dataType: "json",
                     success:function(res){
                         _this.$data.recordItem = res.data.result;
+                        _this.total_mileage = res.data.total_mileage;
                     }
                 });
             }

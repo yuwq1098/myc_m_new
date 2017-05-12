@@ -35,8 +35,8 @@
         <div class="left imgwrap"><img src="../img/b25.jpg" alt="汽车品牌LOGO"></div>
         <div class="infor">
           <p>大众 帕萨特领驭</p>
-          <p class="vinbox"><span>VIN：{{data.vin}}</span><a id="copyVIN" href="javascript:;" class="m-btn">复制VIN</a>
-            <input id="copyInput" type="hideen" value="">
+          <p class="vinbox"><span>VIN：{{data.vin}}</span><a id="copyVIN" @click="copyVIN()" class="m-btn">复制VIN</a>
+            <input id="copyInput" type="text" v-model="cvin" style="position: absolute;left: -9999px;">
           </p>
           <p><span>报告生成日期：{{data.reqTime}}</span></p>
           <div class="btn-box"><a href="check_config.html" class="m-btn m-btn-blue">校验配置</a></div>
@@ -70,7 +70,7 @@
                 <div class="mileage">
                   <div class="bar-wrap">
                     <div class="progress-bar">
-                      <div style="width: 50%" class="gray-bar"></div>
+                      <div :style="{width: (item.mile/total_mileage*100).toFixed(2)+'%'}" class="gray-bar"></div>
                     </div>
                   </div><span class="mile">
                     {{(item.mile/10000).toFixed(2)}}
