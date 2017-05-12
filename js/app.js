@@ -1,9 +1,9 @@
 (function() {
 
-    // ³ö¿ÚÑ¡ÔñÆ÷ÒıÇæ¶¨Òå
+    // å‡ºå£é€‰æ‹©å™¨å¼•æ“å®šä¹‰
     var $$ = window.geekyu||null;
     
-    // ÒÆ¶¯¶ËclickÊÂ¼şÑÓ³Ù300´¦Àí£¬ÇëÔÚÒıÓÃ±¾½Å±¾Ö®Ç°ÏÈÒıÈëfastclick.js
+    // ç§»åŠ¨ç«¯clickäº‹ä»¶å»¶è¿Ÿ300å¤„ç†ï¼Œè¯·åœ¨å¼•ç”¨æœ¬è„šæœ¬ä¹‹å‰å…ˆå¼•å…¥fastclick.js
     var FastClick = window.FastClick||null; 
     if(FastClick){
         window.onload = function() {
@@ -11,7 +11,7 @@
         }
     }
 
-    //·µ»Øµ±Ç°µØÖ·?ºóÃæµÄ²ÎÊıµÄjson¸ñÊ½(ÓÃÓÚsubmitÌá½»µÄstr='1'&str1='2'¸ñÊ½)
+    //è¿”å›å½“å‰åœ°å€?åé¢çš„å‚æ•°çš„jsonæ ¼å¼(ç”¨äºsubmitæäº¤çš„str='1'&str1='2'æ ¼å¼)
     function strToJson(){
         var str=window.location.search;
         var reg=/&+/g;
@@ -26,34 +26,32 @@
         return str;
     };
 
-    //¸ñÊ½»¯·½·¨£¬¸ødate×·¼ÓÊôĞÔ
+    //æ ¼å¼åŒ–æ–¹æ³•ï¼Œç»™dateè¿½åŠ å±æ€§
     Date.prototype.Format = function (fmt) { //author: meizz 
         var o = {
-            "M+": this.getMonth() + 1, //ÔÂ·İ 
-            "d+": this.getDate(), //ÈÕ 
-            "h+": this.getHours(), //Ğ¡Ê± 
-            "m+": this.getMinutes(), //·Ö 
-            "s+": this.getSeconds(), //Ãë 
-            "q+": Math.floor((this.getMonth() + 3) / 3), //¼¾¶È 
-            "S": this.getMilliseconds() //ºÁÃë 
+            "M+": this.getMonth() + 1, //æœˆä»½ 
+            "d+": this.getDate(), //æ—¥ 
+            "h+": this.getHours(), //å°æ—¶ 
+            "m+": this.getMinutes(), //åˆ† 
+            "s+": this.getSeconds(), //ç§’ 
+            "q+": Math.floor((this.getMonth() + 3) / 3), //å­£åº¦ 
+            "S": this.getMilliseconds() //æ¯«ç§’ 
         };
         if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
         for (var k in o)
         if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
         return fmt;
     }
+    var Guid=0;
+    if(window.location.search.match('Guid')){
+        Guid = strToJson().Guid;   
+    }
+    var URL = "https://www.muyouche.com/action/getChaBaoYangRltByGuid.ashx?Guid="+ Guid;
 
-    //³µÁ¾¼ì²â±¨¸æÏêÇé
+    //è½¦è¾†æ£€æµ‹æŠ¥å‘Šè¯¦æƒ…
     var mtnce_report = function(){
-        var copyBtn = document.getElementById("copyVIN");
-        var copyInput = document.getElementById("copyInput");
-        var Guid=0;
-        if(window.location.search.match('Guid')){
-            Guid = strToJson().Guid;   
-        }
-       
-        var URL = "https://www.muyouche.com/action/getChaBaoYangRltByGuid.ashx?Guid="+ Guid;
-        // »ù±¾ĞÅÏ¢
+        
+        // åŸºæœ¬ä¿¡æ¯
         var basic = new Vue({
             el: '#basic-info',
             data: {
@@ -65,15 +63,15 @@
                     var vin = this.data.vin;
                     var copyInput = $("#copyInput");
                     this.cvin = vin;
-                    //jsÖ´ĞĞË³ĞòµÄÎÊÌâ
+                    //jsæ‰§è¡Œé¡ºåºçš„é—®é¢˜
                     setTimeout(function(){
-                        copyInput.select(); // Ñ¡Ôñ¶ÔÏó
+                        copyInput.select(); // é€‰æ‹©å¯¹è±¡
                         var execCommand = document.execCommand||null;
                         if(execCommand){
-                            document.execCommand("Copy"); // Ö´ĞĞä¯ÀÀÆ÷¸´ÖÆÃüÁî
-                            alert("³É¹¦¸´ÖÆ,¿ÉÕ³ÌùÊ¹ÓÃ!");
+                            document.execCommand("Copy"); // æ‰§è¡Œæµè§ˆå™¨å¤åˆ¶å‘½ä»¤
+                            alert("æˆåŠŸå¤åˆ¶,å¯ç²˜è´´ä½¿ç”¨!");
                         }else{
-                            alert("ÄúµÄÉè±¸²»Ö§³Ö×Ô¶¯¸´ÖÆ£¬ÇëÊÖ¶¯¸´ÖÆ!");
+                            alert("æ‚¨çš„è®¾å¤‡ä¸æ”¯æŒè‡ªåŠ¨å¤åˆ¶ï¼Œè¯·æ‰‹åŠ¨å¤åˆ¶!");
                         }
                     })
                 }
@@ -89,9 +87,9 @@
                     }
                 });
             },
-            //vueµÄ¹ıÂËÆ÷
+            //vueçš„è¿‡æ»¤å™¨
             filters: {
-                //½ø¶ÈÌõ¼ÆËã
+                //è¿›åº¦æ¡è®¡ç®—
                 dateFormat: function (date) {
                     if(!date) return false;
                     var date = new Date(date).Format("yyyy-MM-dd hh:mm:ss");
@@ -99,7 +97,7 @@
                 },
             }
         })
-        // ±¨¸æ¸ÅÒª
+        // æŠ¥å‘Šæ¦‚è¦
         var listGroup = new Vue({
             el: '#listGroup',
             data: {
@@ -117,7 +115,7 @@
                 });
             }
         })
-        // Ñø»¤¼ÇÂ¼
+        // å…»æŠ¤è®°å½•
         var record = new Vue({
             el: '#record-list',
             data: {
@@ -136,9 +134,9 @@
                     }
                 });
             },
-            //vueµÄ¹ıÂËÆ÷
+            //vueçš„è¿‡æ»¤å™¨
             filters: {
-                //½ø¶ÈÌõ¼ÆËã
+                //è¿›åº¦æ¡è®¡ç®—
                 scheduleFn: function (mile,total) {
                     var schedule = (mile/total*100).toFixed(2) + "%";
                     var style = {
@@ -146,14 +144,14 @@
                     }
                     return style;
                 },
-                //Ê±¼ä¸ñÊ½×ª»»
+                //æ—¶é—´æ ¼å¼è½¬æ¢
                 dateFn: function (date) {
-                    var date = date.substr(0,4)+'Äê'+date.substr(5,2)+'ÔÂ';
+                    var date = date.substr(0,4)+'å¹´'+date.substr(5,2)+'æœˆ';
                     return date.toString();
                 },
-                //Íò¹«Àï¸ñÊ½×ª»»
+                //ä¸‡å…¬é‡Œæ ¼å¼è½¬æ¢
                 mileFn: function (mile) {
-                    var mile = (mile/10000).toFixed(2)+"Íò¹«Àï"
+                    var mile = (mile/10000).toFixed(2)+"ä¸‡å…¬é‡Œ"
                     return mile.toString();
                 },
             }
@@ -161,26 +159,97 @@
     }
     window.mtnce_report = mtnce_report;
     
-    //Ğ£ÑéÅäÖÃ
+    //æ ¡éªŒé…ç½®
     var check_config = function(){
-        console.log("ºÇºÇßÕ")
-        //Ğ£ÑéÅäÖÃµÄDOM
-        var $config = $("section.config");
-        //ÏêÏ¸ÅäÖÃµÄDOM
-        var $moreconfig = $("section.moreconfig");
-        //²é¿´¸ü¶àµÄ°´Å¥
-        var $lockConfig_btn = $config.find("a#lockConfig");
-
-        $lockConfig_btn.on("click",function(){
-            $config.hide();
-            $moreconfig.show();
+        
+        // æ¦‚è¦é…ç½®ä¿¡æ¯
+        var config = new Vue({
+            el: '#configBox',
+            data: {
+                data: {},
+            },
+            methods: {
+                lookMore: function(){
+                    //æ ¡éªŒé…ç½®çš„DOM
+                    var $config = $("section.config");
+                    //è¯¦ç»†é…ç½®çš„DOM
+                    var $moreconfig = $("section.moreconfig");
+                    $config.hide();
+                    $moreconfig.show();
+                }
+            },
+            mounted: function(){
+                var _this = this;
+                $.ajax({
+                    url: "report.json",
+                    type:'GET',
+                    dataType: "json",
+                    success:function(res){
+                        _this.data = res.data;
+                    }
+                });
+            }
+        })
+        // è¯¦ç»†é…ç½®ä¿¡æ¯
+        var moreconfig = new Vue({
+            el: '#moreconfig',
+            data: {
+                data: {},
+            },
+            mounted: function(){
+                var _this = this;
+                $.ajax({
+                    url: "report.json",
+                    type:'GET',
+                    dataType: "json",
+                    success:function(res){
+                        _this.data = res.data;
+                    }
+                });
+            }
         })
     }
     window.check_config = check_config;
 
-    //¼ì²âÏêÇé--ÍêÕû±¨¸æ
+    //æ£€æµ‹è¯¦æƒ…--å®Œæ•´æŠ¥å‘Š
     var full_mtnce_report = function(){
-        console.log("this is full_mtnce_report page!")
+
+        // è½¦è¾†ä¿¡æ¯
+        var carInfo = new Vue({
+            el: '#car-info',
+            data: {
+                data: {},
+            },
+            mounted: function(){
+                var _this = this;
+                $.ajax({
+                    url: "report.json",
+                    type:'GET',
+                    dataType: "json",
+                    success:function(res){
+                        _this.data = res.data;
+                    }
+                });
+            }
+        })
+        //ç»´ä¿®ä¿å…»è®°å½•
+        var reportlist = new Vue({
+            el: '#reportlist',
+            data: {
+                listItem: {},
+            },
+            mounted: function(){
+                var _this = this;
+                $.ajax({
+                    url: "report.json",
+                    type:'GET',
+                    dataType: "json",
+                    success:function(res){
+                        _this.listItem = res.data.result;
+                    }
+                });
+            }
+        })   
     }
     window.full_mtnce_report = full_mtnce_report;
 

@@ -21,10 +21,6 @@ $color_g1 = $color_gray - 8%
 $color_g2 = $color_g1 - 8%
 $color_g3 = $color_g2 - 8%
 $color_g4 = $color_g3 - 8%
-$color_gy_a = $color_gray + 10%
-$color_gy_b = $color_gy_a + 15%
-$color_gy_c = $color_gy_b + 20%
-$color_gy_d = $color_gy_c + 25%
 //红色
 $color_red = #f43
 $color_r1 = $color_red - 8%
@@ -100,11 +96,11 @@ _btnColor(color=$color_bk_a,bgColor=$color_gray)
 //按钮颜色皮肤
 _btnHoverColorP(color=$color_bk_a,bgColor=$color_gray)
     &:active
-        background-color bgColor - 15%
+        background-color bgColor - 10%
         color color
 _btnHoverColorN(color=$color_bk_a,bgColor=$color_gray)
     &:active
-        background-color bgColor + 15%
+        background-color bgColor + 10%
         color color
 
 //垂直布局
@@ -246,8 +242,8 @@ body
                 line-height .5rem
                 _verticalLayout(,.15rem)
                 _btnStyle()
-                _btnColor(,$color_gy_c)
-                _btnHoverColorP(,$color_gy_c);
+                _btnColor(,$color_gray)
+                _btnHoverColorP(,$color_gray);
      
     div.btn-box
         margin-top .3rem
@@ -420,6 +416,7 @@ body
                     background-size 100% 100%
             span
                 height .85rem
+            
 
     .statementCon
         p
@@ -485,8 +482,6 @@ section >.group-cells
         _spacingPlus(3px)
         _btnStyle(6px)
         _btnColor($color_w1,$color_blue)
-        a.m-btn-full
-            _display(block)
         _btnHoverColorN($color_w1,$color_blue)
 
 .moreconfig

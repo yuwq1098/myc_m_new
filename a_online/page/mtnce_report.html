@@ -17,13 +17,12 @@
     <!--木有车网页描述-->
     <meta name="description" content="木有车汽车服务平台(m.muyouche.com)">
     <title>木有车_车辆检测报告详情</title>
-    <!--引入字体文件-->
-    <link href="../font/iconfont.css" rel="stylesheet" type="text/css">
     <link href="../css/app.css" rel="stylesheet" type="text/css">
     <!--引入vue-->
     <script src="../js/vue.min.js"></script>
     <!--调用弹性布局js-->
     <script src="../js/flexible.js"></script>
+    <script src="../js/app.js"></script>
     <!-- stylus css预编译插件-->
     <style>      
       
@@ -40,7 +39,7 @@
             <input id="copyInput" type="text" v-model="cvin" style="position: absolute;left: -9999px;">
           </p>
           <p><span>报告生成日期：{{data.reqTime | dateFormat}}</span></p>
-          <div class="btn-box"><a href="check_config.html" class="m-btn m-btn-blue">校验配置</a></div>
+          <div class="btn-box"><a :href="'check_config.html?Guid='+Guid" class="m-btn m-btn-blue">校验配置</a></div>
         </div>
       </section>
       <!--报告概要-->
@@ -50,7 +49,7 @@
           <li><span class="title">最后进店时间：</span><span v-cloak class="val">{{infoList.last_time_to_shop}}</span></li>
           <li><span class="title">最后进店里程：</span><span v-show="infoList" class="val">
               {{infoList.total_mileage}}
-              公里</span></li>
+              万公里</span></li>
           <li><span class="title">里程是否异常：</span><span class="val">否</span></li>
           <li><span class="title">三大件维修记录：</span><span class="val">暂无</span></li>
           <li><span class="title">火烧、泡水：</span><span class="val">暂无</span></li>
@@ -58,12 +57,12 @@
         </ul>
       </section>
       <!--养护记录-->
-      <section class="maintain">
+      <section id="record-list" class="maintain">
         <div class="tit clearfix">
           <h3> 重要记录</h3>
-          <section class="right-box"><a href="full_mtnce_report.html" class="m-btn m-btn-blue">查看完整报告</a></section>
+          <section class="right-box"><a :href="'full_mtnce_report.html?Guid='+Guid" class="m-btn m-btn-blue">查看完整报告</a></section>
         </div>
-        <div id="record-list" v-cloak class="con">
+        <div v-cloak class="con">
           <ul class="record-list">
             <li v-for="item in recordItem">
               <section class="time-box"><span>{{item.date | dateFn}}</span></section>
@@ -73,7 +72,9 @@
                     <div class="progress-bar">
                       <div :style="item.mile | scheduleFn(total_mileage)" class="gray-bar"></div>
                     </div>
-                  </div><span class="mile">{{item.mile | mileFn}}</span>
+                  </div><span class="mile">
+                    {{item.mile | mileFn}}
+                    </span>
                 </div>
                 <div class="pinfo"><span class="title">类型：</span><span class="val special">{{item.type}}</span></div>
                 <div class="pinfo"><span class="title">项目：</span><span class="val">{{item.detail}}</span></div>

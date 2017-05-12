@@ -17,13 +17,12 @@ html
         //木有车网页描述
         meta(name="description" content="木有车汽车服务平台(m.muyouche.com)")
         title 木有车_车辆检测报告详情
-        //引入字体文件
-        link(href="../font/iconfont.css", rel="stylesheet", type="text/css")
         link(href="../css/app.css", rel="stylesheet", type="text/css")
         //引入vue
         script(src="../js/vue.min.js")
         //调用弹性布局js
         script(src="../js/flexible.js")
+        script(src="../js/app.js")
         
         // stylus css预编译插件
         style
@@ -40,10 +39,10 @@ html
                     p 大众 帕萨特领驭
                     p.vinbox
                         span VIN：{{data.vin}}
-                        a#copyVIN.m-btn(@click="copyVIN()") 复制VIN
-                        input#copyInput(type="text" v-model="cvin" style="position: absolute;left: -9999px;")
+                        a#copyVIN.m-btn(href="javascript:;") 复制VIN
+                        input#copyInput(type="hideen" value="")
                     p
-                        span 报告生成日期：{{data.reqTime | dateFormat}}
+                        span 报告生成日期：{{data.reqTime}}
                     div.btn-box
                         a.m-btn.m-btn-blue(href="check_config.html") 校验配置
             
@@ -57,7 +56,7 @@ html
                     li
                         span.title 最后进店里程：
                         span.val(v-show="infoList") {{infoList.total_mileage}}
-                            |公里
+                            |万公里
                     li
                         span.title 里程是否异常：
                         span.val 否
@@ -81,13 +80,14 @@ html
                     ul.record-list
                         li(v-for="item in recordItem")
                             section.time-box
-                                span {{item.date | dateFn}}
+                                span {{ item.date.substr(0,4)}}年{{item.date.substr(5,2)}}月
                             section.infor-box
                                 .mileage
                                     .bar-wrap
                                         .progress-bar
-                                            .gray-bar(:style="item.mile | scheduleFn(total_mileage)")
-                                    span.mile {{item.mile | mileFn}}
+                                            .gray-bar(style="width: 50%")
+                                    span.mile {{(item.mile/10000).toFixed(2)}}
+                                        |万公里
                                 .pinfo
                                     span.title 类型：
                                     span.val.special {{item.type}}

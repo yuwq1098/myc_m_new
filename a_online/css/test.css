@@ -1,0 +1,30 @@
+.test{
+	position: absolute;
+	position: relative;
+	box-sizing: border-box;
+	overflow: hidden;
+	border-radius: 5px;
+	text-decoration: none;
+	display: inline-block;
+	letter-spacing: 1px;
+	text-indent: 1px;
+	vertical-align: middle;
+}
+
+/*
+ * 垂直布局 和 完全居中布局
+ */
+.vertical-layout{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+}
+.complete-center{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
