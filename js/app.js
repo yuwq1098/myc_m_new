@@ -8,7 +8,6 @@
     if(FastClick){
         window.onload = function() {
             FastClick.attach(document.body);
-            console.log("load this fastclick!");
         }
     }
 
@@ -27,105 +26,84 @@
         return str;
     };
 
-    //返回当前地址?后面的参数的json格式(用于自己拼接的str={}&str1={}格式)
-    function strToJson1(){
-        var str=window.location.search;
-        var reg=/&+/g;
-        var reg1=/=+/g;
-        
-        str=decodeURI(str);
-        str=str.replace('?','"');
-        str=str.replace(reg,',"');
-        str=str.replace(reg1,'":');
-        str='{'+str+'}';
-        str=JSON.parse(str);    
-        return str;
-    };
-
-
     //车辆检测报告详情
     var mtnce_report = function(){
-        window.onload = function(){
-            var copyBtn = document.getElementById("copyVIN");
-            var copyInput = document.getElementById("copyInput");
-            var Guid=0;
-            if(window.location.search.match('Guid')){
-                Guid = strToJson().Guid;   
-            }
-           
-            var URL = "https://www.muyouche.com/action/getChaBaoYangRltByGuid.ashx?Guid="+ Guid;
-            console.log(URL);
-
-            copyBtn.onclick = function(){
-                var vin = this.previousSibling.innerText;
-                vin = vin.replace(/\w{3}\W{1}/, "");
-                copyInput.value = vin;
-                copyInput.select(); // 选择对象
-                var execCommand = document.execCommand||null;
-                if(execCommand){
-                    document.execCommand("Copy"); // 执行浏览器复制命令
-                    alert("成功复制,可粘贴使用!");
-                }else{
-                    alert("您的设备不支持自动复制，请手动复制!");
-                }
-            }
-            // 基本信息
-            var basic = new Vue({
-                el: '#basic-info',
-                data: {
-                    data: {},
-                },
-                mounted: function(){
-                    var _this = this;
-                    $.ajax({
-                        url: "report.json",
-                        type:'GET',
-                        dataType: "json",
-                        success:function(res){
-                            _this.data = res.data;
-                        }
-                    });
-                }
-            })
-            // 报告概要
-            var listGroup = new Vue({
-                el: '#listGroup',
-                data: {
-                    infoList: {},
-                },
-                mounted: function(){
-                    var _this = this;
-                    $.ajax({
-                        url: "report.json",
-                        type:'GET',
-                        dataType: "json",
-                        success:function(res){
-                            _this.$data.infoList = res.data;
-                        }
-                    });
-                }
-            })
-            // 养护记录
-            var record = new Vue({
-                el: '#record-list',
-                data: {
-                    recordItem: [],
-                },
-                mounted: function(){
-                    var _this = this;
-                    $.ajax({
-                        url: "report.json",
-                        type:'GET',
-                        dataType: "json",
-                        success:function(res){
-                            _this.$data.recordItem = res.data.result;
-                        }
-                    });
-                }
-            })
-            
-            
+        var copyBtn = document.getElementById("copyVIN");
+        var copyInput = document.getElementById("copyInput");
+        var Guid=0;
+        if(window.location.search.match('Guid')){
+            Guid = strToJson().Guid;   
         }
+       
+        var URL = "https://www.muyouche.com/action/getChaBaoYangRltByGuid.ashx?Guid="+ Guid;
+
+        copyBtn.onclick = function(){
+            var vin = this.previousSibling.innerText;
+            vin = vin.replace(/\w{3}\W{1}/, "");
+            copyInput.value = vin;
+            copyInput.select(); // 选择对象
+            var execCommand = document.execCommand||null;
+            if(execCommand){
+                document.execCommand("Copy"); // 执行浏览器复制命令
+                alert("成功复制,可粘贴使用!");
+            }else{
+                alert("您的设备不支持自动复制，请手动复制!");
+            }
+        }
+        // 基本信息
+        var basic = new Vue({
+            el: '#basic-info',
+            data: {
+                data: {},
+            },
+            mounted: function(){
+                var _this = this;
+                $.ajax({
+                    url: "report.json",
+                    type:'GET',
+                    dataType: "json",
+                    success:function(res){
+                        _this.data = res.data;
+                    }
+                });
+            }
+        })
+        // 报告概要
+        var listGroup = new Vue({
+            el: '#listGroup',
+            data: {
+                infoList: {},
+            },
+            mounted: function(){
+                var _this = this;
+                $.ajax({
+                    url: "report.json",
+                    type:'GET',
+                    dataType: "json",
+                    success:function(res){
+                        _this.$data.infoList = res.data;
+                    }
+                });
+            }
+        })
+        // 养护记录
+        var record = new Vue({
+            el: '#record-list',
+            data: {
+                recordItem: [],
+            },
+            mounted: function(){
+                var _this = this;
+                $.ajax({
+                    url: "report.json",
+                    type:'GET',
+                    dataType: "json",
+                    success:function(res){
+                        _this.$data.recordItem = res.data.result;
+                    }
+                });
+            }
+        })
     }
     window.mtnce_report = mtnce_report;
     
