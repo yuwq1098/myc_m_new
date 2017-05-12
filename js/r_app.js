@@ -57,22 +57,22 @@
                     cvin: "",
                 },
                 methods: {
-                	copyVIN: function(){
-                		var vin = this.data.vin;
-                		var copyInput = $("#copyInput");
-                		this.cvin = vin;
-//              		js执行顺序的问题
-                		setTimeout(function(){
-                			copyInput.select(); // 选择对象
-                			var execCommand = document.execCommand||null;
-                			if(execCommand){
-			                    document.execCommand("Copy"); // 执行浏览器复制命令
-			                    alert("成功复制,可粘贴使用!");
-			                }else{
-			                    alert("您的设备不支持自动复制，请手动复制!");
-			                }
-                		})
-                	}
+                    copyVIN: function(){
+                        var vin = this.data.vin;
+                        var copyInput = $("#copyInput");
+                        this.cvin = vin;
+//                      js执行顺序的问题
+                        setTimeout(function(){
+                            copyInput.select(); // 选择对象
+                            var execCommand = document.execCommand||null;
+                            if(execCommand){
+                                document.execCommand("Copy"); // 执行浏览器复制命令
+                                alert("成功复制,可粘贴使用!");
+                            }else{
+                                alert("您的设备不支持自动复制，请手动复制!");
+                            }
+                        })
+                    }
                 },
                 mounted: function(){
                     var _this = this;
@@ -84,8 +84,6 @@
                             _this.data = res.data;
                         }
                     });
-                    
-                    
                 }
             })
             // 报告概要
@@ -111,6 +109,7 @@
                 el: '#record-list',
                 data: {
                     recordItem: [],
+                    total_mileage: "",
                 },
                 mounted: function(){
                     var _this = this;
@@ -120,8 +119,13 @@
                         dataType: "json",
                         success:function(res){
                             _this.$data.recordItem = res.data.result;
+                            _this.total_mileage = res.data.total_mileage;
                         }
                     });
+                    setTimeout(function(){
+                        var schedule = (_this.recordItem.mile/_this.total_mileage*100).toFixed(2);
+                        console.log(schedule);
+                    },500)
                 }
             })
             

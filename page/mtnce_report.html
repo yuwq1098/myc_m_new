@@ -38,7 +38,7 @@
           <p class="vinbox"><span>VIN：{{data.vin}}</span><a id="copyVIN" @click="copyVIN()" class="m-btn">复制VIN</a>
             <input id="copyInput" type="text" v-model="cvin" style="position: absolute;left: -9999px;">
           </p>
-          <p><span>报告生成日期：{{data.reqTime}}</span></p>
+          <p><span>报告生成日期：{{data.reqTime | dateFormat}}</span></p>
           <div class="btn-box"><a href="check_config.html" class="m-btn m-btn-blue">校验配置</a></div>
         </div>
       </section>
@@ -65,15 +65,15 @@
         <div id="record-list" v-cloak class="con">
           <ul class="record-list">
             <li v-for="item in recordItem">
-              <section class="time-box"><span>{{ item.date.substr(0,4)}}年{{item.date.substr(5,2)}}月</span></section>
+              <section class="time-box"><span>{{item.date | dateFn}}</span></section>
               <section class="infor-box">
                 <div class="mileage">
                   <div class="bar-wrap">
                     <div class="progress-bar">
-                      <div :style="{width: (item.mile/total_mileage*100).toFixed(2)+'%'}" class="gray-bar"></div>
+                      <div :style="item.mile | scheduleFn(total_mileage)" class="gray-bar"></div>
                     </div>
                   </div><span class="mile">
-                    {{(item.mile/10000).toFixed(2)}}
+                    {{item.mile | mileFn}}
                     万公里</span>
                 </div>
                 <div class="pinfo"><span class="title">类型：</span><span class="val special">{{item.type}}</span></div>

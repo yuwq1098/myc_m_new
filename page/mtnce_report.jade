@@ -42,7 +42,7 @@ html
                         a#copyVIN.m-btn(@click="copyVIN()") 复制VIN
                         input#copyInput(type="text" v-model="cvin" style="position: absolute;left: -9999px;")
                     p
-                        span 报告生成日期：{{data.reqTime}}
+                        span 报告生成日期：{{data.reqTime | dateFormat}}
                     div.btn-box
                         a.m-btn.m-btn-blue(href="check_config.html") 校验配置
             
@@ -80,13 +80,13 @@ html
                     ul.record-list
                         li(v-for="item in recordItem")
                             section.time-box
-                                span {{ item.date.substr(0,4)}}年{{item.date.substr(5,2)}}月
+                                span {{item.date | dateFn}}
                             section.infor-box
                                 .mileage
                                     .bar-wrap
                                         .progress-bar
-                                            .gray-bar(:style="{width: (item.mile/total_mileage*100).toFixed(2)+'%'}")
-                                    span.mile {{(item.mile/10000).toFixed(2)}}
+                                            .gray-bar(:style="item.mile | scheduleFn(total_mileage)")
+                                    span.mile {{item.mile | mileFn}}
                                         |万公里
                                 .pinfo
                                     span.title 类型：

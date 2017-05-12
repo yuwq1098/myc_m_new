@@ -1,9 +1,9 @@
 (function() {
 
-    // å‡ºå£é€‰æ‹©å™¨å¼•æ“å®šä¹‰
+    // ³ö¿ÚÑ¡ÔñÆ÷ÒıÇæ¶¨Òå
     var $$ = window.geekyu||null;
     
-    // ç§»åŠ¨ç«¯clickäº‹ä»¶å»¶è¿Ÿ300å¤„ç†ï¼Œè¯·åœ¨å¼•ç”¨æœ¬è„šæœ¬ä¹‹å‰å…ˆå¼•å…¥fastclick.js
+    // ÒÆ¶¯¶ËclickÊÂ¼şÑÓ³Ù300´¦Àí£¬ÇëÔÚÒıÓÃ±¾½Å±¾Ö®Ç°ÏÈÒıÈëfastclick.js
     var FastClick = window.FastClick||null; 
     if(FastClick){
         window.onload = function() {
@@ -11,7 +11,7 @@
         }
     }
 
-    //è¿”å›å½“å‰åœ°å€?åé¢çš„å‚æ•°çš„jsonæ ¼å¼(ç”¨äºsubmitæäº¤çš„str='1'&str1='2'æ ¼å¼)
+    //·µ»Øµ±Ç°µØÖ·?ºóÃæµÄ²ÎÊıµÄjson¸ñÊ½(ÓÃÓÚsubmitÌá½»µÄstr='1'&str1='2'¸ñÊ½)
     function strToJson(){
         var str=window.location.search;
         var reg=/&+/g;
@@ -26,7 +26,24 @@
         return str;
     };
 
-    //è½¦è¾†æ£€æµ‹æŠ¥å‘Šè¯¦æƒ…
+    //¸ñÊ½»¯·½·¨£¬¸ødate×·¼ÓÊôĞÔ
+    Date.prototype.Format = function (fmt) { //author: meizz 
+        var o = {
+            "M+": this.getMonth() + 1, //ÔÂ·İ 
+            "d+": this.getDate(), //ÈÕ 
+            "h+": this.getHours(), //Ğ¡Ê± 
+            "m+": this.getMinutes(), //·Ö 
+            "s+": this.getSeconds(), //Ãë 
+            "q+": Math.floor((this.getMonth() + 3) / 3), //¼¾¶È 
+            "S": this.getMilliseconds() //ºÁÃë 
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+        if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    }
+
+    //³µÁ¾¼ì²â±¨¸æÏêÇé
     var mtnce_report = function(){
         var copyBtn = document.getElementById("copyVIN");
         var copyInput = document.getElementById("copyInput");
@@ -36,7 +53,7 @@
         }
        
         var URL = "https://www.muyouche.com/action/getChaBaoYangRltByGuid.ashx?Guid="+ Guid;
-        // åŸºæœ¬ä¿¡æ¯
+        // »ù±¾ĞÅÏ¢
         var basic = new Vue({
             el: '#basic-info',
             data: {
@@ -48,15 +65,15 @@
                     var vin = this.data.vin;
                     var copyInput = $("#copyInput");
                     this.cvin = vin;
-                    //jsæ‰§è¡Œé¡ºåºçš„é—®é¢˜
+                    //jsÖ´ĞĞË³ĞòµÄÎÊÌâ
                     setTimeout(function(){
-                        copyInput.select(); // é€‰æ‹©å¯¹è±¡
+                        copyInput.select(); // Ñ¡Ôñ¶ÔÏó
                         var execCommand = document.execCommand||null;
                         if(execCommand){
-                            document.execCommand("Copy"); // æ‰§è¡Œæµè§ˆå™¨å¤åˆ¶å‘½ä»¤
-                            alert("æˆåŠŸå¤åˆ¶,å¯ç²˜è´´ä½¿ç”¨!");
+                            document.execCommand("Copy"); // Ö´ĞĞä¯ÀÀÆ÷¸´ÖÆÃüÁî
+                            alert("³É¹¦¸´ÖÆ,¿ÉÕ³ÌùÊ¹ÓÃ!");
                         }else{
-                            alert("æ‚¨çš„è®¾å¤‡ä¸æ”¯æŒè‡ªåŠ¨å¤åˆ¶ï¼Œè¯·æ‰‹åŠ¨å¤åˆ¶!");
+                            alert("ÄúµÄÉè±¸²»Ö§³Ö×Ô¶¯¸´ÖÆ£¬ÇëÊÖ¶¯¸´ÖÆ!");
                         }
                     })
                 }
@@ -71,9 +88,18 @@
                         _this.data = res.data;
                     }
                 });
+            },
+            //vueµÄ¹ıÂËÆ÷
+            filters: {
+                //½ø¶ÈÌõ¼ÆËã
+                dateFormat: function (date) {
+                    if(!date) return false;
+                    var date = new Date(date).Format("yyyy-MM-dd hh:mm:ss");
+                    return date
+                },
             }
         })
-        // æŠ¥å‘Šæ¦‚è¦
+        // ±¨¸æ¸ÅÒª
         var listGroup = new Vue({
             el: '#listGroup',
             data: {
@@ -91,7 +117,7 @@
                 });
             }
         })
-        // å…»æŠ¤è®°å½•
+        // Ñø»¤¼ÇÂ¼
         var record = new Vue({
             el: '#record-list',
             data: {
@@ -109,19 +135,40 @@
                         _this.total_mileage = res.data.total_mileage;
                     }
                 });
+            },
+            //vueµÄ¹ıÂËÆ÷
+            filters: {
+                //½ø¶ÈÌõ¼ÆËã
+                scheduleFn: function (mile,total) {
+                    var schedule = (mile/total*100).toFixed(2) + "%";
+                    var style = {
+                        width: schedule.toString(),
+                    }
+                    return style;
+                },
+                //Ê±¼ä¸ñÊ½×ª»»
+                dateFn: function (date) {
+                    var date = date.substr(0,4)+'Äê'+date.substr(5,2)+'ÔÂ';
+                    return date.toString();
+                },
+                //Íò¹«Àï¸ñÊ½×ª»»
+                mileFn: function (mile) {
+                    var mile = (mile/10000).toFixed(2)+"Íò¹«Àï"
+                    return mile.toString();
+                },
             }
         })
     }
     window.mtnce_report = mtnce_report;
     
-    //æ ¡éªŒé…ç½®
+    //Ğ£ÑéÅäÖÃ
     var check_config = function(){
-        console.log("å‘µå‘µå“’")
-        //æ ¡éªŒé…ç½®çš„DOM
+        console.log("ºÇºÇßÕ")
+        //Ğ£ÑéÅäÖÃµÄDOM
         var $config = $("section.config");
-        //è¯¦ç»†é…ç½®çš„DOM
+        //ÏêÏ¸ÅäÖÃµÄDOM
         var $moreconfig = $("section.moreconfig");
-        //æŸ¥çœ‹æ›´å¤šçš„æŒ‰é’®
+        //²é¿´¸ü¶àµÄ°´Å¥
         var $lockConfig_btn = $config.find("a#lockConfig");
 
         $lockConfig_btn.on("click",function(){
@@ -131,7 +178,7 @@
     }
     window.check_config = check_config;
 
-    //æ£€æµ‹è¯¦æƒ…--å®Œæ•´æŠ¥å‘Š
+    //¼ì²âÏêÇé--ÍêÕû±¨¸æ
     var full_mtnce_report = function(){
         console.log("this is full_mtnce_report page!")
     }
