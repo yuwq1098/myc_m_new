@@ -99,11 +99,13 @@
         <div id="reportlist" class="reportlist">
           <ul>
             <li v-for="item in listItem">
-              <div class="timedistance">
+              <div class="timedistance" style="font-size:0;letter-spaceing:-4px;">
               	<span v-cloak>{{item.date}}</span>
               	<span v-cloak>{{item.mile}}公里</span>
               	<span>
-                  <div style="display:none" class="imgwrap"><i class="iconfont icon-arrowdownb"></i><i style="display:none" class="iconfont icon-arrowupb"></i></div>{{item.type}}</span></div>
+                  <div style="display:none" class="imgwrap"><i class="iconfont icon-arrowdownb"></i><i style="display:none" class="iconfont icon-arrowupb"></i>
+                  </div>{{item.type}}</span>
+              </div>
               <p v-cloak><span>细节：</span>{{item.detail}}</p>
               <p v-cloak><span>其他：</span>{{item.other}}</p>
             </li>
