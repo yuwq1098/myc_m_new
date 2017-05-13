@@ -39,83 +39,45 @@
             <div class="cell__bd">
               <p>车架号</p>
             </div>
-            <div class="cell__ft">
-               
-              {{data.vin}}
-            </div>
+            <div class="cell__ft">{{data.vin}}</div>
           </section>
           <section class="group-cell">
             <div class="cell__bd">
               <p>品牌</p>
             </div>
-            <div class="cell__ft">大众</div>
+            <div class="cell__ft">{{data.brand_name}}</div>
           </section>
           <section class="group-cell">
             <div class="cell__bd">
               <p>型号</p>
             </div>
-            <div class="cell__ft">帕萨特领驭</div>
+            <div class="cell__ft">{{data.series_name}}</div>
           </section>
           <section class="group-cell">
             <div class="cell__bd">
               <p>上市时间</p>
             </div>
-            <div class="cell__ft">2007</div>
+            <div class="cell__ft">{{data.model_year}}</div>
           </section>
           <section class="group-cell">
             <div class="cell__bd">
               <p>排放标准</p>
             </div>
-            <div class="cell__ft">国4</div>
+            <div class="cell__ft">{{data.model_emission_standard}}</div>
           </section>
           <section class="group-cell">
             <div class="cell__bd">
               <p>厂家指导价</p>
             </div>
-            <div class="cell__ft">19.98万元</div>
+            <div class="cell__ft">{{data.model_price}}万元</div>
           </section>
-          <section class="group-cell">
+          <section class="group-cell"  v-for="item in data.result_outline">
             <div class="cell__bd">
-              <p>最后进店时间</p>
+              <p>{{item.label}}</p>
             </div>
             <div class="cell__ft">
-               
-              {{data.last_time_to_shop}}
+              {{item.content}}
             </div>
-          </section>
-          <section class="group-cell">
-            <div class="cell__bd">
-              <p>最后进店里程</p>
-            </div>
-            <div class="cell__ft">
-               
-              {{data.total_mileage}}
-              公里
-            </div>
-          </section>
-          <section class="group-cell">
-            <div class="cell__bd">
-              <p>里程是否异常</p>
-            </div>
-            <div class="cell__ft">否</div>
-          </section>
-          <section class="group-cell">
-            <div class="cell__bd">
-              <p>三大件维修记录</p>
-            </div>
-            <div class="cell__ft">暂无</div>
-          </section>
-          <section class="group-cell">
-            <div class="cell__bd">
-              <p>火烧、泡水</p>
-            </div>
-            <div class="cell__ft">暂无</div>
-          </section>
-          <section class="group-cell">
-            <div class="cell__bd">
-              <p>车身结构异常</p>
-            </div>
-            <div class="cell__ft">暂无</div>
           </section>
         </div>
       </section>

@@ -31,30 +31,26 @@
   <body oncontextmenu="return false" class="user-unselect">
     <div class="main-view opaque">
       <!--主要信息-->
-      <section id="basic-info" class="basic-info clearfix">
-        <div class="left imgwrap"><img src="../img/b25.jpg" alt="汽车品牌LOGO"></div>
+      <section id="basic-info" class="basic-info clearfix" v-cloak>
+        <div class="left imgwrap"><img :src="'https://img71.muyouche.com/CarBrand/'+data.brand_id+'.jpg'" alt="汽车品牌LOGO"></div>
         <div class="infor">
-          <p>大众 帕萨特领驭</p>
+          <p>{{data.brand_name}} - {{data.series_name}}</p>
           <p class="vinbox"><span>VIN：{{data.vin}}</span><a id="copyVIN" @click="copyVIN()" class="m-btn">复制VIN</a>
             <input id="copyInput" type="text" v-model="cvin" style="position: absolute;left: -9999px;">
           </p>
-          <p><span>报告生成日期：{{data.reqTime | dateFormat}}</span></p>
+          <p><span>报告生成日期：{{data.create_date | timestampFormat}}</span></p>
           <div class="btn-box"><a :href="'check_config.html?Guid='+Guid" class="m-btn m-btn-blue">校验配置</a></div>
         </div>
       </section>
       <!--报告概要-->
-      <section id="listGroup" v-cloak class="listGroup">
+      <section id="listGroup" class="listGroup">
         <h3>报告概要</h3>
         <ul>
-          <li><span class="title">最后进店时间：</span><span v-cloak class="val">{{infoList.last_time_to_shop}}</span></li>
-          <li><span class="title">最后进店里程：</span><span v-show="infoList" class="val">
-              {{infoList.total_mileage}}
-              万公里</span></li>
-          <li><span class="title">里程是否异常：</span><span class="val">否</span></li>
-          <li><span class="title">三大件维修记录：</span><span class="val">暂无</span></li>
-          <li><span class="title">火烧、泡水：</span><span class="val">暂无</span></li>
-          <li><span class="title">车身结构异常：</span><span class="val">暂无</span></li>
+        	<li v-for="item in resultList">
+        		  <span class="title">{{item.label}}</span><span v-cloak class="val">{{item.content}}</span>
+        	</li>
         </ul>
+        
       </section>
       <!--养护记录-->
       <section id="record-list" class="maintain">

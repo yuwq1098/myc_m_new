@@ -42,31 +42,31 @@
             <div class="cell__bd">
               <p>车型</p>
             </div>
-            <div class="cell__ft">2007款 帕萨特领驭 1.8T 手动豪华型</div>
+            <div class="cell__ft">{{data.model_name}}</div>
           </section>
           <section class="group-cell">
             <div class="cell__bd">
               <p>厂家指导价</p>
             </div>
-            <div class="cell__ft">19.98万</div>
+            <div class="cell__ft">{{data.model_price}}万</div>
           </section>
           <section class="group-cell">
             <div class="cell__bd">
               <p>上市时间</p>
             </div>
-            <div class="cell__ft">2007</div>
+            <div class="cell__ft">{{data.model_year}}年</div>
           </section>
           <section class="group-cell">
             <div class="cell__bd">
               <p>停产年份</p>
             </div>
-            <div class="cell__ft">2011</div>
+            <div class="cell__ft">暂无数据</div>
           </section>
           <section class="group-cell">
             <div class="cell__bd">
               <p>排放标准</p>
             </div>
-            <div class="cell__ft">国4</div>
+            <div class="cell__ft">{{data.model_emission_standard}}</div>
           </section>
         </div>
         <div class="btn-block"><a id="lookConfig" @click="lookMore()" class="m-btn-full m-btn-blue">查看车辆详细配置</a></div>

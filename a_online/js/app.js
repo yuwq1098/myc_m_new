@@ -61,7 +61,7 @@
     if(window.location.search.match('Guid')){
         Guid = strToJson().Guid;   
     }
-    var URL = "https://www.muyouche.com/action/getChaBaoYangRltByGuid.ashx?Guid="+ Guid;
+    var URL = "https://www.muyouche.com/action/getChaBaoYangOrderNoByGuid.ashx?Guid="+ Guid;
     
     //车辆检测报告详情
     var mtnce_report = function(){
@@ -105,19 +105,25 @@
                 },
                 //vue的过滤器
 	            filters: {
-	                //进度条计算
+	                //日期格式化
 	                dateFormat: function (date) {
 	                	if(!date) return false;
 	                	var date = new Date(date).Format("yyyy-MM-dd hh:mm:ss");
 	                    return date
 	                },
+	                //时间戳格式化
+	                timestampFormat: function(timestamp) {
+	                	if(!timestamp) return false;
+	                	var date = new Date(timestamp*1000).Format("yyyy-MM-dd hh:mm:ss");
+	                    return date
+	                }
 	            }
             })
             // 报告概要
             var listGroup = new Vue({
                 el: '#listGroup',
                 data: {
-                    infoList: {},
+                    resultList: {},
                     Guid: Guid,
                 },
                 mounted: function(){
@@ -127,7 +133,7 @@
                         type:'GET',
                         dataType: "json",
                         success:function(res){
-                            _this.$data.infoList = res.data;
+                            _this.resultList = res.data.result_outline;
                         }
                     });
                 }
@@ -147,8 +153,8 @@
                         type:'GET',
                         dataType: "json",
                         success:function(res){
-                            _this.$data.recordItem = res.data.result;
-                            _this.total_mileage = res.data.total_mileage;
+                            _this.recordItem = res.data.all_records;
+                            _this.total_mileage = res.data.result_outline[1].content;
                         }
                     });
                 },
@@ -242,7 +248,7 @@
             mounted: function(){
                 var _this = this;
                 $.ajax({
-                    url: "report.json",
+                    url: URL,
                     type:'GET',
                     dataType: "json",
                     success:function(res){
@@ -260,11 +266,11 @@
             mounted: function(){
                 var _this = this;
                 $.ajax({
-                    url: "report.json",
+                    url: URL,
                     type:'GET',
                     dataType: "json",
                     success:function(res){
-                        _this.listItem = res.data.result;
+                        _this.listItem = res.data.all_records;
                     }
                 });
             }
