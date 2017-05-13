@@ -24,6 +24,12 @@
     <script src="../js/vue.min.js"></script>
     <!--调用弹性布局js-->
     <script src="../js/flexible.js"></script>
+    <style>      
+      /*vue对{{}}未编译钱先隐藏*/
+			[v-cloak] {
+			  display: none;
+			}
+    </style>
   </head>
   <body oncontextmenu="return false" class="user-unselect">
     <div class="main-view">
@@ -34,7 +40,7 @@
             <div class="cell__bd">
               <p>车架号</p>
             </div>
-            <div class="cell__ft">{{data.vin}}</div>
+            <div class="cell__ft" v-cloak>{{data.vin}}</div>
           </section>
         </div>
         <div class="group-cells">
@@ -42,19 +48,19 @@
             <div class="cell__bd">
               <p>车型</p>
             </div>
-            <div class="cell__ft">{{data.model_name}}</div>
+            <div class="cell__ft" v-cloak>{{data.model_name}}</div>
           </section>
           <section class="group-cell">
             <div class="cell__bd">
               <p>厂家指导价</p>
             </div>
-            <div class="cell__ft">{{data.model_price}}万</div>
+            <div class="cell__ft" v-cloak>{{data.model_price}}万</div>
           </section>
           <section class="group-cell">
             <div class="cell__bd">
               <p>上市时间</p>
             </div>
-            <div class="cell__ft">{{data.model_year}}年</div>
+            <div class="cell__ft" v-cloak>{{data.model_year}}年</div>
           </section>
           <section class="group-cell">
             <div class="cell__bd">
@@ -66,7 +72,7 @@
             <div class="cell__bd">
               <p>排放标准</p>
             </div>
-            <div class="cell__ft">{{data.model_emission_standard}}</div>
+            <div class="cell__ft" v-cloak>{{data.model_emission_standard}}</div>
           </section>
         </div>
         <div class="btn-block"><a id="lookConfig" @click="lookMore()" class="m-btn-full m-btn-blue">查看车辆详细配置</a></div>

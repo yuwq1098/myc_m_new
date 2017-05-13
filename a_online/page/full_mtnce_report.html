@@ -24,6 +24,12 @@
     <script src="../js/vue.min.js"></script>
     <!--调用弹性布局js-->
     <script src="../js/flexible.js"></script>
+    <style>      
+      /*vue对{{}}未编译钱先隐藏*/
+			[v-cloak] {
+			  display: none;
+			}
+    </style>
   </head>
   <body oncontextmenu="return false" class="user-unselect">
     <div class="main-view complete">
@@ -39,43 +45,43 @@
             <div class="cell__bd">
               <p>车架号</p>
             </div>
-            <div class="cell__ft">{{data.vin}}</div>
+            <div class="cell__ft" v-cloak>{{data.vin}}</div>
           </section>
           <section class="group-cell">
             <div class="cell__bd">
               <p>品牌</p>
             </div>
-            <div class="cell__ft">{{data.brand_name}}</div>
+            <div class="cell__ft" v-cloak>{{data.brand_name}}</div>
           </section>
           <section class="group-cell">
             <div class="cell__bd">
               <p>型号</p>
             </div>
-            <div class="cell__ft">{{data.series_name}}</div>
+            <div class="cell__ft" v-cloak>{{data.series_name}}</div>
           </section>
           <section class="group-cell">
             <div class="cell__bd">
               <p>上市时间</p>
             </div>
-            <div class="cell__ft">{{data.model_year}}</div>
+            <div class="cell__ft" v-cloak>{{data.model_year}}</div>
           </section>
           <section class="group-cell">
             <div class="cell__bd">
               <p>排放标准</p>
             </div>
-            <div class="cell__ft">{{data.model_emission_standard}}</div>
+            <div class="cell__ft" v-cloak>{{data.model_emission_standard}}</div>
           </section>
           <section class="group-cell">
             <div class="cell__bd">
               <p>厂家指导价</p>
             </div>
-            <div class="cell__ft">{{data.model_price}}万元</div>
+            <div class="cell__ft" v-cloak>{{data.model_price}}万元</div>
           </section>
-          <section class="group-cell"  v-for="item in data.result_outline">
+          <section class="group-cell" v-for="item in data.result_outline">
             <div class="cell__bd">
-              <p>{{item.label}}</p>
+              <p v-cloak>{{item.label}}</p>
             </div>
-            <div class="cell__ft">
+            <div class="cell__ft" v-cloak>
               {{item.content}}
             </div>
           </section>
@@ -93,12 +99,13 @@
         <div id="reportlist" class="reportlist">
           <ul>
             <li v-for="item in listItem">
-              <div class="timedistance"><span>{{item.date}}</span><span>
-                  {{item.mile}}
-                  公里</span><span>
+              <div class="timedistance">
+              	<span v-cloak>{{item.date}}</span>
+              	<span v-cloak>{{item.mile}}公里</span>
+              	<span>
                   <div style="display:none" class="imgwrap"><i class="iconfont icon-arrowdownb"></i><i style="display:none" class="iconfont icon-arrowupb"></i></div>{{item.type}}</span></div>
-              <p><span>细节：</span>{{item.detail}}</p>
-              <p><span>其他：</span>{{item.other}}</p>
+              <p v-cloak><span>细节：</span>{{item.detail}}</p>
+              <p v-cloak><span>其他：</span>{{item.other}}</p>
             </li>
           </ul>
         </div>

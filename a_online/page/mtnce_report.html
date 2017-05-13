@@ -25,20 +25,23 @@
     <script src="../js/app.js"></script>
     <!-- stylus css预编译插件-->
     <style>      
-      
+      /*vue对{{}}未编译钱先隐藏*/
+			[v-cloak] {
+			  display: none;
+			}
     </style>
   </head>
   <body oncontextmenu="return false" class="user-unselect">
     <div class="main-view opaque">
       <!--主要信息-->
-      <section id="basic-info" class="basic-info clearfix" v-cloak>
-        <div class="left imgwrap"><img :src="'https://img71.muyouche.com/CarBrand/'+data.brand_id+'.jpg'" alt="汽车品牌LOGO"></div>
+      <section id="basic-info" class="basic-info clearfix">
+        <div class="left imgwrap box-hidden" :class="[ data.brand_id ? 'box-show': '' ]" v-cloak><img :src="data.brand_id ? 'https://img71.muyouche.com/CarBrand/'+data.brand_id+'.jpg' : ''" alt="汽车品牌LOGO"></div>
         <div class="infor">
-          <p>{{data.brand_name}} - {{data.series_name}}</p>
-          <p class="vinbox"><span>VIN：{{data.vin}}</span><a id="copyVIN" @click="copyVIN()" class="m-btn">复制VIN</a>
+          <p v-cloak>{{data.brand_name}} - {{data.series_name}}</p>
+          <p class="vinbox" v-cloak><span>VIN：{{data.vin}}</span><a id="copyVIN" @click="copyVIN()" class="m-btn">复制VIN</a>
             <input id="copyInput" type="text" v-model="cvin" style="position: absolute;left: -9999px;">
           </p>
-          <p><span>报告生成日期：{{data.create_date | timestampFormat}}</span></p>
+          <p><span v-cloak>报告生成日期：{{data.create_date | timestampFormat}}</span></p>
           <div class="btn-box"><a :href="'check_config.html?Guid='+Guid" class="m-btn m-btn-blue">校验配置</a></div>
         </div>
       </section>
@@ -47,7 +50,7 @@
         <h3>报告概要</h3>
         <ul>
         	<li v-for="item in resultList">
-        		  <span class="title">{{item.label}}</span><span v-cloak class="val">{{item.content}}</span>
+        		  <span class="title" v-cloak>{{item.label}}</span><span class="val" v-cloak>{{item.content}}</span>
         	</li>
         </ul>
         
