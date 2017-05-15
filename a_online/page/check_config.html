@@ -32,10 +32,18 @@
     </style>
   </head>
   <body oncontextmenu="return false" class="user-unselect">
+  	<div class="m-header m-header-fixed" id="header" v-show="isShow"  v-cloak>
+  		<div class="left">
+  			<a class="fl__break" href="javascript:history.go(-1)">
+  				<i class="iconfont icon-iosarrowleft"></i>
+  	   </a>
+  		</div>
+  		<h2 class="center" v-cloak>{{pageName}}</h2>
+  	</div>
     <div class="main-view">
       <!--概要配置-->
-      <section id="configBox" class="config">
-        <div class="group-cells">
+      <section id="configBox" class="config" :class="[header?'margin-header-fixed':'']">
+        <div class="group-cells" :class="[header?' bt-none':'']">
           <section class="group-cell">
             <div class="cell__bd">
               <p>车架号</p>
@@ -75,11 +83,11 @@
             <div class="cell__ft" v-cloak>{{data.model_emission_standard}}</div>
           </section>
         </div>
-        <div class="btn-block"><a id="lookConfig" @click="lookMore()" class="m-btn-full m-btn-blue">查看车辆详细配置</a></div>
+        <div class="btn-block" style="display: none;"><a id="lookConfig" @click="lookMore()" class="m-btn-full m-btn-blue">查看车辆详细配置</a></div>
       </section>
       <!--详细配置信息-->
-      <section id="moreconfig" class="moreconfig box-hidden">
-        <div class="group-cells">
+      <section id="moreconfig" class="moreconfig box-hidden" :class="[header?'margin-header-fixed':'']">
+        <div class="group-cells" :class="[header?' bt-none':'']">
           <section class="group-cell tit">
             <div class="cell__bd">
               <p>车辆详细配置</p>

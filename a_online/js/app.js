@@ -58,21 +58,31 @@
 	    return fmt;
 	}
     var Guid=0;
+    var isApp=false;
     if(window.location.search.match('Guid')){
         Guid = strToJson().Guid;   
+        isApp = strToJson().app||null;
+        isApp = !isApp?true:false;
     }
     var URL = "https://www.muyouche.com/action/getChaBaoYangOrderNoByGuid.ashx?Guid="+ Guid;
     
     //车辆检测报告详情
     var mtnce_report = function(){
-            
+            var header = new Vue({
+            	el: "#header",
+            	data: {
+            		pageName: "检修保养报告",
+            		isShow: isApp,
+            	}
+            })
             // 基本信息
             var basic = new Vue({
                 el: '#basic-info',
                 data: {
                     data: {},
                     cvin: "",
-                    Guid: Guid,
+                    Guid: !isApp?Guid+"&app=1":Guid,
+                    header: isApp,
                 },
                 methods: {
                 	copyVIN: function(){
@@ -124,7 +134,6 @@
                 el: '#listGroup',
                 data: {
                     resultList: {},
-                    Guid: Guid,
                 },
                 mounted: function(){
                     var _this = this;
@@ -144,7 +153,7 @@
                 data: {
                     recordItem: [],
                     total_mileage: "",
-                    Guid: Guid,
+                    Guid: !isApp?Guid+"&app=1":Guid,
                 },
                 mounted: function(){
                     var _this = this;
@@ -186,12 +195,19 @@
     
     //校验配置
     var check_config = function(){
-        
+        var header = new Vue({
+        	el: "#header",
+        	data: {
+        		pageName: "校验配置",
+        		isShow: isApp,
+        	}
+        })
         // 概要配置信息
         var config = new Vue({
             el: '#configBox',
             data: {
                 data: {},
+                header: isApp,
             },
             methods: {
                 lookMore: function(){
@@ -220,6 +236,7 @@
             el: '#moreconfig',
             data: {
                 data: {},
+                header: isApp,
             },
             mounted: function(){
                 var _this = this;
@@ -238,12 +255,20 @@
 
     //检测详情--完整报告
     var full_mtnce_report = function(){
-
+        
+        var header = new Vue({
+        	el: "#header",
+        	data: {
+        		pageName: "详细检测报告",
+        		isShow: isApp,
+        	}
+        })
         // 车辆信息
         var carInfo = new Vue({
             el: '#car-info',
             data: {
                 data: {},
+                header: isApp,
             },
             mounted: function(){
                 var _this = this;

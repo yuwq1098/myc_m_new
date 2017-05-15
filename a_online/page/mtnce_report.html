@@ -17,6 +17,8 @@
     <!--木有车网页描述-->
     <meta name="description" content="木有车汽车服务平台(m.muyouche.com)">
     <title>木有车_车辆检测报告详情</title>
+    <!--引入字体文件-->
+    <link href="../font/iconfont.css" rel="stylesheet" type="text/css">
     <link href="../css/app.css" rel="stylesheet" type="text/css">
     <!--引入vue-->
     <script src="../js/vue.min.js"></script>
@@ -32,9 +34,19 @@
     </style>
   </head>
   <body oncontextmenu="return false" class="user-unselect">
+  	
+  	<div class="m-header m-header-fixed" id="header" v-show="isShow" v-cloak>
+  		<div class="left">
+  			<a class="fl__break" href="javascript:history.go(-1)">
+  				<i class="iconfont icon-iosarrowleft"></i>
+  	   </a>
+  		</div>
+  		<h2 class="center" v-cloak>{{pageName}}</h2>
+  	</div>
     <div class="main-view opaque">
+    	
       <!--主要信息-->
-      <section id="basic-info" class="basic-info clearfix">
+      <section class="basic-info clearfix" id="basic-info" :class="[header?'margin-header-fixed':'']">
         <div class="left imgwrap box-hidden" :class="[ data.brand_id ? 'box-show': '' ]" v-cloak><img :src="data.brand_id ? 'https://img71.muyouche.com/CarBrand/'+data.brand_id+'.jpg' : ''" alt="汽车品牌LOGO"></div>
         <div class="infor">
           <p v-cloak>{{data.brand_name}} - {{data.series_name}}</p>

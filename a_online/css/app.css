@@ -54,6 +54,57 @@ body {
 .opaque {
   background: #fff;
 }
+.m-header{
+	height: 48px;
+	background-color: #fff;
+	border-bottom: 1px solid #e0e0e0;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	padding: 0 1.5rem;
+}
+.m-header >.left,
+.m-header >.rigth{
+	position: absolute;
+	top: 0;
+}
+.m-header >.left{
+	left: .25rem;
+}
+.m-header >.left .fl__break{
+	display: block;
+	height: 48px;
+	line-height: 48px;
+	padding: 0 .1rem;
+	color: #3c89fd;
+}
+.fl__break i{
+	font-size: 24px;
+}
+.m-header >.right{
+	right: .25rem;
+}
+.m-header-fixed{
+	width: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 999;
+}
+.margin-header-fixed{
+	margin-top: 48px;
+}
+.padding-header-fixed{
+	padding-top: 48px;
+}
+.m-header h2{
+	width: 100%;
+	line-height: 48px;
+	text-align: center;
+	font-size: 16px;
+	letter-spacing: 1px;
+	text-indent: 1px;
+	color: #3c89fd;
+}
 .basic-info {
   width: 100%;
   padding: 0.25rem 0;
@@ -445,6 +496,9 @@ section >.group-cells::after {
   border-bottom: 1px solid #cecece;
   -webkit-transform-origin: 0 100%;
   transform-origin: 0 100%;
+}
+section >.group-cells.bt-none::before{
+	display: none;
 }
 .config .btn-block {
   padding: 0 0.3rem;
