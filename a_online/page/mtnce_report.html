@@ -33,7 +33,7 @@
 			}
     </style>
   </head>
-  <body oncontextmenu="return false" class="user-unselect">
+  <body oncontextmenu="return false">
   	
   	<div class="m-header m-header-fixed" id="header" v-show="isShow" v-cloak>
   		<div class="left">
@@ -50,7 +50,7 @@
         <div class="left imgwrap box-hidden" :class="[ data.brand_id ? 'box-show': '' ]" v-cloak><img :src="data.brand_id ? 'https://img71.muyouche.com/CarBrand/'+data.brand_id+'.jpg' : ''" alt="汽车品牌LOGO"></div>
         <div class="infor">
           <p v-cloak>{{data.brand_name}} - {{data.series_name}}</p>
-          <p class="vinbox" v-cloak><span>VIN：{{data.vin}}</span><a id="copyVIN" @click="copyVIN()" class="m-btn">复制VIN</a>
+          <p class="vinbox" v-cloak><span>VIN：{{data.vin}}</span><a id="copyVIN" style="display: none;" @click="copyVIN()" class="m-btn">复制VIN</a>
             <input id="copyInput" type="text" v-model="cvin" style="position: absolute;left: -9999px;">
           </p>
           <p><span v-cloak>报告生成日期：{{data.create_date | timestampFormat}}</span></p>

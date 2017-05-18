@@ -1,0 +1,211 @@
+doctype html
+html
+    head
+        meta(charset="utf-8")
+        meta(name="viewport" content="width=device-width,initial-scale=1,user-scalable=0")
+        //禁用苹果默认样式
+        meta(name="apple-mobile-web-app-capable" content="yes")
+        meta(name="apple-mobile-web-app-status-bar-style" content="black")
+        //作者信息
+        meta(name="author" content="name:Geek.Yu,email:1098654043@qq.com")
+        //版权信息
+        meta(name="copyright" content="")
+        //禁止ios自动识别手机号和邮箱
+        meta(name="format-detection" content="telephone=no,address=no")
+        //木有车网页关键词
+        meta(name="keywords" content="")
+        //木有车网页描述
+        meta(name="description" content="木有车汽车服务平台(m.muyouche.com)")
+        title 木有车_公告详情
+        //引入字体文件
+        link(href="../font/iconfont.css", rel="stylesheet", type="text/css")
+        link(href="../css/app.css", rel="stylesheet", type="text/css")
+        //引入vue
+        script(src="../js/vue.min.js")
+        //调用弹性布局js
+        script(src="../js/flexible.js")
+        
+        // stylus css预编译插件
+        style
+            :stylus
+                $c_bule = #3c89fd
+                $c_white = #fff
+                $c_gray = #b2b5b8
+                $c_black = #313536
+                body
+                    width 100%
+                    height 100vh
+                    position relative
+                    background -webkit-linear-gradient(left top, $c_bule - 5%, $c_bule + 25%)
+                    background -o-linear-gradient(bottom right, $c_bule - 5%, $c_bule + 25%)
+                    background -moz-linear-gradient(bottom right, $c_bule - 5%, $c_bule + 25%)
+                    background linear-gradient(to bottom right, $c_bule - 5%, $c_bule + 25%)
+                    overflow hidden
+                .notice
+                    box-sizing border-box
+                    padding .25rem .3rem
+                .G-list-box
+                    width 10rem
+                    height 100%
+                    overflow auto
+                    margin 0 auto
+                    //启动滚动条加速
+                    -webkit-overflow-scrolling touch
+                    position relative
+                    .G-list-item
+                        width 100%
+                        position relative
+                        padding-left 1rem
+                        box-sizing border-box
+                        &:not(:last-child)
+                            margin-bottom .25rem
+                        .item-no
+                            position absolute
+                            top .25rem
+                            left -.1rem
+                            width 1rem
+                            text-align right
+                            height .7rem
+                            line-height .7rem
+                            display block
+                            font-size 18px
+                            font-weight 700
+                            font-style oblique
+                            color $c_bule - 45% + 2deg
+                        .item-info-bar
+                            width 100%
+                            box-sizing border-box
+                            padding .15rem .2rem
+                            -webkit-border-radius .1rem
+                            border-radius .1rem
+                            background $c_white + -0.3%
+                            color $c_gray - 20%
+                            p.txt
+                                line-height .7rem
+                                margin-bottom .2rem
+                                color $c_black + 10%
+                                letter-spacing 1px
+                                text-indent 1px
+                            p.time-box
+                                height .7rem
+                                text-align right
+                                position relative
+                                font-size 14px
+                                & span.time
+                                    display block
+                                    height .7rem
+                                    line-height .7rem
+                                    padding-left .2rem
+                                    background $c_white + -0.3%
+                                    position absolute
+                                    right 0
+                                    top 0
+                                    &::before
+                                        content "——"
+                                        color $c_gray + 10%
+                                        margin-right 4px
+                    .G-list-item
+                        .item-no.item-has-ico
+                            color transparent
+                            &::after
+                                content ""
+                                display block
+                                width .7rem
+                                height .7rem
+                                position absolute
+                                right .2rem
+                                top .25rem
+                                background url(../img/trumpet_01.png) 0 0 no-repeat;
+                                background-size 100% 100%
+                        &:nth-child(1)
+                            .item-no
+                                &::after
+                                    background url(../img/trumpet_01.png) 0 0 no-repeat;
+                                    background-size 100% 100%
+                        &:nth-child(2)
+                            .item-no
+                                &::after
+                                    background url(../img/trumpet_02.png) 0 0 no-repeat;
+                                    background-size 100% 100%
+                        &:nth-child(3)
+                            .item-no
+                                &::after
+                                    background url(../img/trumpet_03.png) 0 0 no-repeat;
+                                    background-size 100% 100%
+
+
+
+
+
+    body.user-unselect(oncontextmenu="return false")
+        
+        .G-list-box#notice.notice
+          section.G-list-item(v-for="(item, index) in adlist")
+            .item-no(:class="index < 3 ? 'item-has-ico' : ''")
+              | {{index + 1}}.
+            .item-info-bar 
+                p.txt
+                  | {{item.Title}}
+                p.time-box
+                  span.time
+                    | {{item.ExpDate | dateFn}}
+
+
+        
+        // coffee-script js预编译插件
+        script
+            :coffee-script
+        // 引用jq库
+        script(src="../js/jquery.min.js")
+        // 移动端click事件延迟修复
+        script(src="../js/fastclick.js")
+        script(type="text/javascript").
+            //格式化方法，给date追加属性
+            Date.prototype.Format = function (fmt) { //author: meizz 
+                var o = {
+                    "M+": this.getMonth() + 1, //月份 
+                    "d+": this.getDate(), //日 
+                    "h+": this.getHours(), //小时 
+                    "m+": this.getMinutes(), //分 
+                    "s+": this.getSeconds(), //秒 
+                    "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+                    "S": this.getMilliseconds() //毫秒 
+                };
+                if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+                for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+                return fmt;
+            }
+
+            // 概要配置信息
+            var config = new Vue({
+                el: '#notice',
+                data: {
+                    adlist: {},
+                },
+                methods: {
+                    
+                },
+                mounted: function(){
+                    var _this = this;
+                    $.ajax({
+                        url: "notice.json",
+                        type:'GET',
+                        dataType: "json",
+                        success:function(res){
+                            _this.adlist = res.adlist[2].list;
+                        }
+                    });
+                },
+                //vue的过滤器
+                filters: {
+                    //时间格式转换
+                    dateFn: function (date) {
+                        var date = new Date(date).Format("yyyy-MM-dd hh:mm:ss");
+                        return date.toString();
+                    },
+                }
+
+            })
+
+            

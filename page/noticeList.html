@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+    <!--禁用苹果默认样式-->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <!--作者信息-->
+    <meta name="author" content="name:Geek.Yu,email:1098654043@qq.com">
+    <!--版权信息-->
+    <meta name="copyright" content="">
+    <!--禁止ios自动识别手机号和邮箱-->
+    <meta name="format-detection" content="telephone=no,address=no">
+    <!--木有车网页关键词-->
+    <meta name="keywords" content="">
+    <!--木有车网页描述-->
+    <meta name="description" content="木有车汽车服务平台(m.muyouche.com)">
+    <title>木有车_公告详情</title>
+    <!--引入字体文件-->
+    <link href="../font/iconfont.css" rel="stylesheet" type="text/css">
+    <link href="../css/app.css" rel="stylesheet" type="text/css">
+    <!--引入vue-->
+    <script src="../js/vue.min.js"></script>
+    <!--调用弹性布局js-->
+    <script src="../js/flexible.js"></script>
+    <!-- stylus css预编译插件-->
+    <style>body {
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  background: -webkit-linear-gradient(left top, #2d80fd, #6da6fe);
+  background: -o-linear-gradient(bottom right, #2d80fd, #6da6fe);
+  background: -moz-linear-gradient(bottom right, #2d80fd, #6da6fe);
+  background: linear-gradient(to bottom right, #2d80fd, #6da6fe);
+  overflow: hidden;
+}
+.notice {
+  box-sizing: border-box;
+  padding: 0.25rem 0.3rem;
+}
+.G-list-box {
+  width: 10rem;
+  height: 100%;
+  overflow: auto;
+  margin: 0 auto;
+  -webkit-overflow-scrolling: touch;
+  position: relative;
+}
+.G-list-box .G-list-item {
+  width: 100%;
+  position: relative;
+  padding-left: 1rem;
+  box-sizing: border-box;
+}
+.G-list-box .G-list-item:not(:last-child) {
+  margin-bottom: 0.25rem;
+}
+.G-list-box .G-list-item .item-no {
+  position: absolute;
+  top: 0.25rem;
+  left: -0.1rem;
+  width: 1rem;
+  text-align: right;
+  height: 0.7rem;
+  line-height: 0.7rem;
+  display: block;
+  font-size: 18px;
+  font-weight: 700;
+  font-style: oblique;
+  color: #023faa;
+}
+.G-list-box .G-list-item .item-info-bar {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.15rem 0.2rem;
+  -webkit-border-radius: 0.1rem;
+  border-radius: 0.1rem;
+  background: #fefefe;
+  color: #8c9195;
+}
+.G-list-box .G-list-item .item-info-bar p.txt {
+  line-height: 0.7rem;
+  margin-bottom: 0.2rem;
+  color: #444a4b;
+  letter-spacing: 1px;
+  text-indent: 1px;
+}
+.G-list-box .G-list-item .item-info-bar p.time-box {
+  height: 0.7rem;
+  text-align: right;
+  position: relative;
+  font-size: 14px;
+}
+.G-list-box .G-list-item .item-info-bar p.time-box span.time {
+  display: block;
+  height: 0.7rem;
+  line-height: 0.7rem;
+  padding-left: 0.2rem;
+  background: #fefefe;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+.G-list-box .G-list-item .item-info-bar p.time-box span.time::before {
+  content: "——";
+  color: #babcbf;
+  mgrgin-right: 4px;
+}
+.G-list-box .G-list-item .item-no.item-has-ico {
+  color: transparent;
+}
+.G-list-box .G-list-item .item-no.item-has-ico::after {
+  content: "";
+  display: block;
+  width: 0.7rem;
+  height: 0.7rem;
+  position: absolute;
+  right: 0.2rem;
+  top: 0.25rem;
+  background: url("../img/trumpet_01.png") 0 0 no-repeat;
+  background-size: 100% 100%;
+}
+.G-list-box .G-list-item:nth-child(1) .item-no::after {
+  background: url("../img/trumpet_01.png") 0 0 no-repeat;
+  background-size: 100% 100%;
+}
+.G-list-box .G-list-item:nth-child(2) .item-no::after {
+  background: url("../img/trumpet_02.png") 0 0 no-repeat;
+  background-size: 100% 100%;
+}
+.G-list-box .G-list-item:nth-child(3) .item-no::after {
+  background: url("../img/trumpet_03.png") 0 0 no-repeat;
+  background-size: 100% 100%;
+}
+
+    </style>
+  </head>
+  <body oncontextmenu="return false" class="user-unselect">
+    <div id="notice" class="G-list-box notice">
+      <section v-for="(item, index) in adlist" class="G-list-item">
+        <div :class="index &lt; 3 ? 'item-has-ico' : ''" class="item-no">{{index + 1}}.</div>
+        <div class="item-info-bar"> 
+          <p class="txt">{{item.Title}}</p>
+          <p class="time-box"><span class="time">{{item.ExpDate | dateFn}}</span></p>
+        </div>
+      </section>
+    </div>
+    <!-- coffee-script js预编译插件-->
+    <script>(function() {
+
+
+}).call(this);
+
+    </script>
+    <!-- 引用jq库-->
+    <script src="../js/jquery.min.js"></script>
+    <!-- 移动端click事件延迟修复-->
+    <script src="../js/fastclick.js"></script>
+    <script type="text/javascript">
+      //格式化方法，给date追加属性
+      Date.prototype.Format = function (fmt) { //author: meizz 
+          var o = {
+              "M+": this.getMonth() + 1, //月份 
+              "d+": this.getDate(), //日 
+              "h+": this.getHours(), //小时 
+              "m+": this.getMinutes(), //分 
+              "s+": this.getSeconds(), //秒 
+              "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+              "S": this.getMilliseconds() //毫秒 
+          };
+          if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+          for (var k in o)
+          if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+          return fmt;
+      }
+      
+      // 概要配置信息
+      var config = new Vue({
+          el: '#notice',
+          data: {
+              adlist: {},
+          },
+          methods: {
+              
+          },
+          mounted: function(){
+              var _this = this;
+              $.ajax({
+                  url: "notice.json",
+                  type:'GET',
+                  dataType: "json",
+                  success:function(res){
+                      _this.adlist = res.adlist[2].list;
+                  }
+              });
+          },
+          //vue的过滤器
+          filters: {
+              //时间格式转换
+              dateFn: function (date) {
+                  var date = new Date(date).Format("yyyy-MM-dd hh:mm:ss");
+                  return date.toString();
+              },
+          }
+      
+      })
+    </script>
+  </body>
+</html>
